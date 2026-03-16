@@ -404,85 +404,91 @@ export function CompanyView({ openModal }: { openModal: (id: string) => void }) 
   }, [isDarkMode]);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex text-slate-900 font-sans selection:bg-blue-100">
-      <aside className={`bg-[#0f172a] text-slate-300 transition-all duration-300 shadow-2xl z-20 ${sidebarOpen ? 'w-64' : 'w-20'} flex flex-col h-screen sticky top-0 hidden md:flex`}>
-        <div className="h-16 flex items-center justify-between px-4 border-b border-white/10 shrink-0">
+    <div className="min-h-screen bg-transparent flex text-slate-900 font-sans selection:bg-blue-100">
+      <aside className={`bg-[#060b14] text-slate-300 transition-all duration-300 shadow-[20px_0_40px_rgba(0,0,0,0.1)] z-20 ${sidebarOpen ? 'w-64' : 'w-20'} flex flex-col h-screen sticky top-0 hidden md:flex relative overflow-hidden`}>
+        {/* Decorative elements in sidebar */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-indigo-600/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
+        </div>
+
+        <div className="h-20 flex items-center justify-between px-5 border-b border-white/5 shrink-0 relative z-10">
           {sidebarOpen && (
-            <span className="text-xl font-bold text-white tracking-wider flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/30">P</div> 
+            <span className="text-2xl font-black text-white tracking-widest flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">P</div> 
               POSNET
             </span>
           )}
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-1.5 hover:bg-white/10 rounded-lg transition-colors ml-auto text-slate-400 hover:text-white">
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 hover:bg-white/10 rounded-xl transition-all ml-auto text-slate-400 hover:text-white backdrop-blur-sm">
             <Menu size={20} />
           </button>
         </div>
-        <nav className="flex-1 p-3 space-y-1.5 overflow-y-auto no-scrollbar">
-          <p className={`text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3 mt-4 ${!sidebarOpen && 'hidden'} px-3`}>หน้าแดชบอร์ด</p>
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto no-scrollbar relative z-10">
+          <p className={`text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 mt-4 ${!sidebarOpen && 'hidden'} px-3`}>หน้าแดชบอร์ด</p>
           <NavItem icon={<PieChartIcon size={20} />} label="ภาพรวมผู้บริหาร" active={activeTab === "executive"} sidebarOpen={sidebarOpen} onClick={() => setActiveTab("executive")} />
           <NavItem icon={<Activity size={20} />} label="ศูนย์ควบคุมงาน" active={activeTab === "command"} sidebarOpen={sidebarOpen} onClick={() => setActiveTab("command")} />
           
-          <p className={`text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3 mt-6 ${!sidebarOpen && 'hidden'} px-3`}>ปฏิบัติการ</p>
+          <p className={`text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 mt-8 ${!sidebarOpen && 'hidden'} px-3`}>ปฏิบัติการ</p>
           <NavItem icon={<MapPin size={20} />} label="แผนที่พิกัดช่าง" active={activeTab === "map"} sidebarOpen={sidebarOpen} onClick={() => setActiveTab("map")} />
           <NavItem icon={<Wrench size={20} />} label="ใบสั่งงานทั้งหมด" active={activeTab === "all-jobs"} sidebarOpen={sidebarOpen} onClick={() => setActiveTab("all-jobs")} />
           <NavItem icon={<FileText size={20} />} label="สร้างรายงาน" active={activeTab === "reports"} sidebarOpen={sidebarOpen} onClick={() => setActiveTab("reports")} />
           <NavItem icon={<CheckCircle size={20} />} label="ติดตาม SLA" active={activeTab === "sla-tracker"} sidebarOpen={sidebarOpen} badge="!" onClick={() => setActiveTab("sla-tracker")} />
           
-          <p className={`text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3 mt-6 ${!sidebarOpen && 'hidden'} px-3`}>ระบบ</p>
+          <p className={`text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 mt-8 ${!sidebarOpen && 'hidden'} px-3`}>ระบบ</p>
           <NavItem icon={<User size={20} />} label="บัญชีลูกค้า" active={activeTab === "customers"} sidebarOpen={sidebarOpen} onClick={() => setActiveTab("customers")} />
           <NavItem icon={<Settings size={20} />} label="ตั้งค่า & SLA" active={activeTab === "settings"} sidebarOpen={sidebarOpen} onClick={() => setActiveTab("settings")} />
         </nav>
         
         {/* Logout Button */}
-        <div className="p-4 border-t border-white/10 shrink-0 mt-auto">
+        <div className="p-5 border-t border-white/5 shrink-0 mt-auto relative z-10 bg-gradient-to-t from-[#060b14] to-transparent">
           <button 
             type="button"
             onClick={() => router.push('/login')}
-            className={`flex items-center gap-3 w-full p-3 rounded-xl text-rose-400 hover:bg-rose-500/20 hover:text-rose-300 transition-all font-bold cursor-pointer ${!sidebarOpen && 'justify-center'}`}
+            className={`flex items-center gap-3 w-full p-3 rounded-xl text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all font-bold cursor-pointer group ${!sidebarOpen && 'justify-center'}`}
           >
-            <LogOut size={20} />
+            <div className="p-1.5 rounded-lg group-hover:bg-rose-500/20 transition-colors"><LogOut size={18} /></div>
             {sidebarOpen && <span>ออกจากระบบ</span>}
           </button>
         </div>
       </aside>
 
-      <main className="flex-1 flex flex-col h-screen overflow-hidden bg-[#f8fafc]">
-        <header className="bg-white/80 backdrop-blur-md h-16 border-b border-slate-200 flex items-center justify-between px-6 lg:px-8 sticky top-0 z-10 shrink-0">
-          <div className="text-lg font-bold text-slate-800 flex items-center gap-3">
-            <span className="hidden sm:inline bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">
+      <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
+        <header className="glass-panel h-20 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-10 shrink-0 border-b border-white/50 m-4 rounded-2xl">
+          <div className="text-xl font-extrabold text-slate-800 flex items-center gap-4">
+            <span className="hidden sm:inline bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 tracking-tight drop-shadow-sm">
               {activeTab === 'executive' ? 'ภาพรวมผู้บริหาร' : activeTab === 'command' ? 'ศูนย์ควบคุมงาน' : activeTab === 'map' ? 'แผนที่พิกัดช่าง' : activeTab === 'reports' ? 'สร้างรายงาน' : activeTab === 'sla-tracker' ? 'ติดตาม SLA' : activeTab === 'customers' ? 'บัญชีลูกค้า' : activeTab === 'settings' ? 'ตั้งค่า & SLA' : 'ใบสั่งงานทั้งหมด'}
             </span>
-            <span className={`px-2 py-0.5 rounded flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider border shadow-sm ${activeTab === 'executive' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : activeTab === 'command' ? 'bg-rose-50 text-rose-600 border-rose-100' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
-              <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${activeTab === 'executive' ? 'bg-emerald-500' : activeTab === 'command' ? 'bg-rose-500' : 'bg-blue-500'}`}></span>
-              ซิงค์ข้อมูลสด
+            <span className={`px-3 py-1 rounded-full flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest shadow-sm border ${activeTab === 'executive' ? 'bg-emerald-50/80 text-emerald-700 border-emerald-200/50' : activeTab === 'command' ? 'bg-rose-50/80 text-rose-700 border-rose-200/50' : 'bg-blue-50/80 text-blue-700 border-blue-200/50'}`}>
+              <span className={`w-2 h-2 rounded-full animate-pulse ${activeTab === 'executive' ? 'bg-emerald-500 shadow-[0_0_5px_#10b981]' : activeTab === 'command' ? 'bg-rose-500 shadow-[0_0_5px_#f43f5e]' : 'bg-blue-500 shadow-[0_0_5px_#3b82f6]'}`}></span>
+              LIVE
             </span>
           </div>
           
-          <div className="flex items-center gap-4 lg:gap-5">
+          <div className="flex items-center gap-5 lg:gap-6">
             <div className="relative group hidden md:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={16} />
-              <input type="text" placeholder="ค้นหางาน, ลูกค้า..." className="pl-9 pr-4 py-1.5 bg-slate-100 border border-transparent rounded-full text-sm focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 w-48 lg:w-64 transition-all" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={16} />
+              <input type="text" placeholder="ค้นหางาน, ลูกค้า..." className="pl-10 pr-4 py-2.5 bg-white/60 border border-white/50 shadow-inner rounded-xl text-sm font-medium focus:outline-none focus:bg-white focus:border-blue-300 focus:ring-4 focus:ring-blue-500/10 w-48 lg:w-72 transition-all" />
             </div>
             <button 
               onClick={() => setIsDarkMode(!isDarkMode)} 
-              className="relative p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-blue-600 transition-colors"
+              className="relative p-2.5 rounded-xl bg-white/50 border border-white/50 shadow-sm hover:bg-white text-slate-500 hover:text-blue-600 transition-all hover:scale-105 hover:-translate-y-0.5"
               title="สลับโหมดหน้าจอ (Toggle Theme)"
             >
-              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <button className="relative p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors">
-              <Bell size={20} />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
+            <button className="relative p-2.5 rounded-xl bg-white/50 border border-white/50 shadow-sm hover:bg-white text-slate-500 hover:text-slate-800 transition-all hover:scale-105 hover:-translate-y-0.5">
+              <Bell size={18} />
+              <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-rose-500 rounded-full border-2 border-white animate-pulse"></span>
             </button>
-            <div className="h-6 w-px bg-slate-200 hidden sm:block"></div>
-            <button className="flex items-center gap-2 hover:bg-slate-50 p-1 pr-2 rounded-full border border-transparent hover:border-slate-200 transition-all">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-slate-800 to-slate-900 flex items-center justify-center text-white font-medium text-sm shadow-sm">HQ</div>
-              <ChevronDown size={14} className="text-slate-400 hidden sm:block" />
+            <div className="h-8 w-px bg-slate-200 hidden sm:block"></div>
+            <button className="flex items-center gap-3 hover:bg-white/60 p-1.5 pr-3 rounded-xl border border-transparent hover:border-white/50 transition-all hover:shadow-sm">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-slate-800 to-black flex items-center justify-center text-white font-bold text-xs shadow-md border border-slate-700">HQ</div>
+              <ChevronDown size={14} className="text-slate-500 hidden sm:block" />
             </button>
           </div>
         </header>
 
-        <div className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8 no-scrollbar">
+        <div className="flex-1 overflow-auto px-4 sm:px-6 lg:px-10 pb-10 no-scrollbar">
           {activeTab === 'executive' && <ExecutiveDashboardContent openModal={openModal} />}
           {activeTab === 'command' && <CommandCenterContent openModal={openModal} />}
           {activeTab === 'map' && <TechnicianMapContent />}
