@@ -509,50 +509,39 @@ export function CompanyView({ openModal }: { openModal: (id: string) => void }) 
 
 function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => void }) {
   return (
-    <div className="space-y-8 pb-12">
-      {/* Cinematic Hero Section */}
-      <div className="relative overflow-hidden rounded-[2.5rem] bg-[#060b14] p-8 lg:p-12 text-white shadow-2xl group border border-white/5">
-        {/* Animated Background Orbs */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] -mr-48 -mt-48 animate-pulse-glow"></div>
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600/20 rounded-full blur-[100px] -ml-32 -mb-32 animate-pulse-glow" style={{ animationDelay: '2s' }}></div>
+    <div className="space-y-8 pb-12 animate-in fade-in duration-700">
+      {/* Refined Premium Header */}
+      <div className="relative overflow-hidden rounded-[2.5rem] bg-white border border-slate-200 p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.02)] group">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-50 rounded-full blur-[100px] -mr-32 -mt-32"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-indigo-50 rounded-full blur-[80px] -ml-20 -mb-20"></div>
         
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-          <div className="lg:col-span-2 space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-[0.2em] animate-in fade-in slide-in-from-left-4 duration-700">
-              <Zap size={14} className="fill-current" /> Live System Performance
+        <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="space-y-4 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-black uppercase tracking-widest">
+              <Zap size={12} className="fill-current" /> System Operational
             </div>
-            <h1 className="text-5xl lg:text-7xl font-black tracking-tighter leading-[0.9] animate-in fade-in slide-in-from-left-4 duration-700 delay-100">
-              POSNET <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400">COMMAND CENTER</span>
+            <h1 className="text-4xl lg:text-5xl font-black tracking-tight text-slate-800 leading-tight">
+              Executive <span className="text-blue-600">Overview</span>
             </h1>
-            <p className="text-slate-400 text-lg max-w-xl font-medium leading-relaxed animate-in fade-in slide-in-from-left-4 duration-700 delay-200">
-              ระบบวิเคราะห์ข้อมูลและติดตามผลการดำเนินงานแบบอัจฉริยะ <br />เชื่อมต่อข้อมูลจากทั่วประเทศเพื่อการตัดสินใจที่แม่นยำที่สุด
+            <p className="text-slate-500 text-base max-w-lg font-medium leading-relaxed">
+              สรุปภาพรวมการดำเนินงานและวิเคราะห์ประสิทธิภาพระบบแบบเรียลไทม์ <br className="hidden lg:block" />เพื่อการบริหารจัดการที่รวดเร็วและแม่นยำ
             </p>
-            <div className="flex flex-wrap gap-4 animate-in fade-in slide-in-from-left-4 duration-700 delay-300">
-              <button className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-sm transition-all shadow-[0_10px_30px_rgba(59,130,246,0.4)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.5)] hover:-translate-y-1 flex items-center gap-3 active:scale-95">
-                <FileText size={18} /> ออกรายงานสรุปผู้บริหาร
-              </button>
-              <button className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-2xl font-black text-sm transition-all backdrop-blur-md flex items-center gap-3 active:scale-95">
-                <Activity size={18} /> ดู Live Stream
-              </button>
-            </div>
           </div>
 
-          {/* Large Circular KPI */}
-          <div className="flex justify-center items-center relative animate-in fade-in zoom-in duration-1000 delay-300">
-            <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-full border-8 border-white/5 flex flex-col items-center justify-center relative group">
-              {/* Spinning ring */}
-              <div className="absolute inset-[-12px] border-2 border-dashed border-blue-500/30 rounded-full animate-rotate-slow"></div>
-              <div className="absolute inset-[-24px] border border-emerald-500/10 rounded-full animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '30s' }}></div>
-              
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-4 bg-emerald-500 text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-[0_0_15px_rgba(16,185,129,0.5)]">Excellent</div>
-              
-              <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-2">Overall SLA</span>
-              <span className="text-7xl lg:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500">94.2</span>
-              <span className="text-2xl font-black text-emerald-400 mt-1">%</span>
-              
-              <div className="absolute bottom-8 flex items-center gap-2 text-emerald-400 text-xs font-bold bg-emerald-400/10 px-3 py-1 rounded-full border border-emerald-400/20">
-                <TrendingUp size={14} /> +2.4%
+          <div className="flex items-center gap-8 bg-slate-50/50 backdrop-blur-sm p-6 rounded-[2rem] border border-slate-100 shadow-inner">
+            <div className="text-center px-4">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Overall SLA</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-5xl font-black text-slate-800">94.2</span>
+                <span className="text-lg font-bold text-emerald-500">%</span>
+              </div>
+            </div>
+            <div className="w-px h-12 bg-slate-200"></div>
+            <div className="text-center px-4">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Satisfaction</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-5xl font-black text-slate-800">4.8</span>
+                <span className="text-lg font-bold text-amber-500">★</span>
               </div>
             </div>
           </div>
@@ -560,91 +549,85 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
       </div>
 
       {/* Main KPI Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-400">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <SummaryCard title="Active Jobs Today" value="156" subtitle="Across all regions" icon={<Briefcase size={20} className="text-blue-600" />} bgColor="bg-blue-50" borderColor="border-blue-200/60" />
         <SummaryCard title="Monthly Completed" value="1,248" subtitle="Target: 1,500" icon={<CheckCircle size={20} className="text-emerald-600" />} bgColor="bg-emerald-50" borderColor="border-emerald-200/60" />
-        <SummaryCard title="Critical Incidents" value="08" subtitle="Immediate attention" icon={<AlertTriangle size={20} className="text-rose-600" />} bgColor="bg-rose-50" borderColor="border-rose-200/60" alert />
-        <SummaryCard title="Avg. CSAT Score" value="4.85" subtitle="Out of 5.00" icon={<Trophy size={20} className="text-amber-600" />} bgColor="bg-amber-50" borderColor="border-amber-200/60" />
+        <SummaryCard title="SLA Warning" value="42" subtitle="Near miss cases" icon={<Clock size={20} className="text-amber-600" />} bgColor="bg-amber-50" borderColor="border-amber-200/60" alert />
+        <SummaryCard title="Pending Approvals" value="15" subtitle="Head action required" icon={<ShieldAlert size={20} className="text-indigo-600" />} bgColor="bg-indigo-50" borderColor="border-indigo-200/60" />
       </div>
 
       {/* Analytics Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Trend Area Chart */}
         <div className="lg:col-span-2 bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white/40 shadow-xl flex flex-col hover:shadow-2xl transition-all duration-500">
           <div className="mb-8 flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-black text-slate-800 tracking-tight">Analytics Dashboard</h2>
-              <p className="text-sm font-medium text-slate-500 mt-1">เปรียบเทียบแนวโน้มปริมาณงานและการเติบโต</p>
+              <h2 className="text-xl font-black text-slate-800 tracking-tight">Performance Trends</h2>
+              <p className="text-xs font-medium text-slate-500 mt-1">เปรียบเทียบปริมาณงานรับเข้าและงานที่ปิดสำเร็จ</p>
             </div>
-            <div className="flex gap-2">
-              <button className="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-200 transition-colors">Daily</button>
-              <button className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-blue-600/20 transition-all">Monthly</button>
+            <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-xl">
+              <button className="px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-500">Daily</button>
+              <button className="px-4 py-1.5 bg-white shadow-sm rounded-lg text-[10px] font-black uppercase tracking-widest text-blue-600">Monthly</button>
             </div>
           </div>
-          <div className="h-[350px] w-full">
+          <div className="h-[320px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={monthlyTrendsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorInc" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.2}/>
                     <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
                   </linearGradient>
                   <linearGradient id="colorComp" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.2}/>
                     <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 700}} dy={15} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 600}} />
-                <RechartsTooltip contentStyle={{borderRadius: '16px', border: 'none', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', padding: '16px'}} />
-                <Legend iconType="circle" verticalAlign="top" align="right" wrapperStyle={{fontSize: '12px', fontWeight: 800, color: '#334155', paddingBottom: '20px'}}/>
-                <Area type="monotone" dataKey="incoming" name="New Jobs" stroke="#3b82f6" strokeWidth={4} fillOpacity={1} fill="url(#colorInc)" />
-                <Area type="monotone" dataKey="completed" name="Resolved" stroke="#10b981" strokeWidth={4} fillOpacity={1} fill="url(#colorComp)" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12, fontWeight: 700}} dy={15} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12, fontWeight: 600}} />
+                <RechartsTooltip contentStyle={{borderRadius: '16px', border: 'none', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', padding: '16px'}} />
+                <Legend iconType="circle" verticalAlign="top" align="right" wrapperStyle={{fontSize: '11px', fontWeight: 800, color: '#64748b', paddingBottom: '20px'}}/>
+                <Area type="monotone" dataKey="incoming" name="Incoming" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorInc)" />
+                <Area type="monotone" dataKey="completed" name="Resolved" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorComp)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Top Technicians Leaderboard */}
-        <div className="bg-[#060b14] text-white p-8 rounded-[2rem] shadow-2xl border border-white/5 flex flex-col relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl"></div>
-          <div className="relative z-10 flex flex-col h-full">
-            <h2 className="text-xl font-black tracking-tight mb-2">TOP PERFORMERS</h2>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-8">ประจำเดือน มีนาคม 2026</p>
-            
-            <div className="space-y-6 flex-1">
-              {[
-                { name: 'สมชาย ขยันซ่อม', score: '99.2%', jobs: 142, img: 'S' },
-                { name: 'วิชัย ไวแสง', score: '98.5%', jobs: 128, img: 'W' },
-                { name: 'ณัฐวุฒิ สุดเก๋า', score: '97.1%', jobs: 115, img: 'N' },
-                { name: 'เอกชัย ใจสู้', score: '96.8%', jobs: 102, img: 'E' },
-              ].map((tech, i) => (
-                <div key={i} className="flex items-center justify-between group/item">
-                  <div className="flex items-center gap-4">
-                    <div className="relative">
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-black text-lg border border-white/10 group-hover/item:scale-110 transition-transform duration-300">
-                        {tech.img}
-                      </div>
-                      {i === 0 && <div className="absolute -top-2 -right-2 text-amber-400 bg-black/50 backdrop-blur-sm rounded-full p-1 border border-amber-400/30"><Trophy size={12} /></div>}
-                    </div>
-                    <div>
-                      <p className="font-bold text-sm group-hover/item:text-blue-400 transition-colors">{tech.name}</p>
-                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{tech.jobs} งานที่สำเร็จ</p>
-                    </div>
+        <div className="bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] shadow-xl border border-white/40 flex flex-col hover:shadow-2xl transition-all duration-500">
+          <h2 className="text-xl font-black text-slate-800 tracking-tight mb-1">TOP PERFORMERS</h2>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-8">Mar 2026 Ranking</p>
+          
+          <div className="space-y-6 flex-1">
+            {[
+              { name: 'สมชาย ขยันซ่อม', score: '99.2%', jobs: 142, img: 'S', color: 'blue' },
+              { name: 'วิชัย ไวแสง', score: '98.5%', jobs: 128, img: 'W', color: 'indigo' },
+              { name: 'ณัฐวุฒิ สุดเก๋า', score: '97.1%', jobs: 115, img: 'N', color: 'emerald' },
+              { name: 'เอกชัย ใจสู้', score: '96.8%', jobs: 102, img: 'E', color: 'slate' },
+            ].map((tech, i) => (
+              <div key={i} className="flex items-center justify-between group/item cursor-pointer">
+                <div className="flex items-center gap-4">
+                  <div className={`w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center font-black text-lg text-slate-400 group-hover/item:bg-blue-600 group-hover/item:text-white group-hover/item:border-blue-600 transition-all duration-300`}>
+                    {tech.img}
                   </div>
-                  <div className="text-right">
-                    <p className="text-base font-black text-emerald-400">{tech.score}</p>
-                    <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">SLA</p>
+                  <div>
+                    <p className="font-bold text-sm text-slate-700 group-hover/item:text-blue-600 transition-colors">{tech.name}</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{tech.jobs} jobs completed</p>
                   </div>
                 </div>
-              ))}
-            </div>
-            
-            <button className="w-full mt-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:text-blue-400 flex items-center justify-center gap-2">
-              ดูอันดับทั้งหมด <ArrowRight size={14} />
-            </button>
+                <div className="text-right">
+                  <p className="text-base font-black text-slate-800">{tech.score}</p>
+                  <p className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">SLA</p>
+                </div>
+              </div>
+            ))}
           </div>
+          
+          <button className="w-full mt-8 py-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] text-slate-500 transition-all flex items-center justify-center gap-2">
+            View All Ranking <ArrowRight size={14} />
+          </button>
         </div>
       </div>
 
