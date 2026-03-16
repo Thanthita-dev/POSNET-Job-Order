@@ -10,7 +10,7 @@ import {
   AlertTriangle, CheckCircle, Clock, Search, Bell, Menu,
   Briefcase, Wrench, User, ChevronDown, MapPin, 
   Activity, ShieldAlert, Calendar, Filter, FileCheck2, TrendingUp, PieChart as PieChartIcon,
-  Download, MoreHorizontal, ArrowUpDown, X, Cpu, MessageSquare, Truck, PenTool, Settings, FileText, CheckSquare, Square, LogOut, Moon, Sun, ArrowRight
+  Download, MoreHorizontal, ArrowUpDown, X, Cpu, MessageSquare, Truck, PenTool, Settings, FileText, CheckSquare, Square, LogOut, Moon, Sun, ArrowRight, Zap, Award, History, Trophy
 } from "lucide-react";
 import dynamic from 'next/dynamic';
 
@@ -509,198 +509,229 @@ export function CompanyView({ openModal }: { openModal: (id: string) => void }) 
 
 function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => void }) {
   return (
-    <>
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white/60 backdrop-blur-xl p-3 lg:p-4 rounded-2xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-in fade-in duration-300">
-        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <div className="flex items-center gap-2 bg-white/80 border border-slate-200/60 shadow-sm rounded-xl px-4 py-2 text-xs sm:text-sm w-full sm:w-auto transition-all hover:shadow-md">
-            <Filter size={14} className="text-blue-500" />
-            <span className="font-bold text-slate-700 whitespace-nowrap">ลูกค้า (Customer):</span>
-            <select className="bg-transparent border-none text-slate-600 font-semibold focus:outline-none cursor-pointer w-full">
-              <option>ทุกบัญชีลูกค้า</option>
-              <option>Bank Of Wealth</option>
-              <option>Retail Corp</option>
-            </select>
+    <div className="space-y-8 pb-12">
+      {/* Cinematic Hero Section */}
+      <div className="relative overflow-hidden rounded-[2.5rem] bg-[#060b14] p-8 lg:p-12 text-white shadow-2xl group border border-white/5">
+        {/* Animated Background Orbs */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] -mr-48 -mt-48 animate-pulse-glow"></div>
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600/20 rounded-full blur-[100px] -ml-32 -mb-32 animate-pulse-glow" style={{ animationDelay: '2s' }}></div>
+        
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+          <div className="lg:col-span-2 space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-[0.2em] animate-in fade-in slide-in-from-left-4 duration-700">
+              <Zap size={14} className="fill-current" /> Live System Performance
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-black tracking-tighter leading-[0.9] animate-in fade-in slide-in-from-left-4 duration-700 delay-100">
+              POSNET <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400">COMMAND CENTER</span>
+            </h1>
+            <p className="text-slate-400 text-lg max-w-xl font-medium leading-relaxed animate-in fade-in slide-in-from-left-4 duration-700 delay-200">
+              ระบบวิเคราะห์ข้อมูลและติดตามผลการดำเนินงานแบบอัจฉริยะ <br />เชื่อมต่อข้อมูลจากทั่วประเทศเพื่อการตัดสินใจที่แม่นยำที่สุด
+            </p>
+            <div className="flex flex-wrap gap-4 animate-in fade-in slide-in-from-left-4 duration-700 delay-300">
+              <button className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-sm transition-all shadow-[0_10px_30px_rgba(59,130,246,0.4)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.5)] hover:-translate-y-1 flex items-center gap-3 active:scale-95">
+                <FileText size={18} /> ออกรายงานสรุปผู้บริหาร
+              </button>
+              <button className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-2xl font-black text-sm transition-all backdrop-blur-md flex items-center gap-3 active:scale-95">
+                <Activity size={18} /> ดู Live Stream
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-2 bg-white/80 border border-slate-200/60 shadow-sm rounded-xl px-4 py-2 text-xs sm:text-sm w-full sm:w-auto transition-all hover:shadow-md">
-            <Calendar size={14} className="text-emerald-500" />
-            <select className="bg-transparent border-none text-slate-600 font-semibold focus:outline-none cursor-pointer w-full">
-              <option>วันนี้ (Live)</option>
-              <option>สัปดาห์นี้</option>
-              <option>เดือนนี้</option>
-              <option>ไตรมาส 1 / 2026</option>
-            </select>
-          </div>
-        </div>
-      </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8 animate-in slide-in-from-bottom-4 duration-500">
-        <div className="relative overflow-hidden rounded-3xl p-6 text-white shadow-[0_8px_30px_rgb(37,99,235,0.2)] bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-900 group">
-          <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:scale-150 transition-transform duration-700 ease-out"></div>
-          <div className="absolute bottom-0 left-0 -ml-8 -mb-8 w-24 h-24 rounded-full bg-blue-400/20 blur-xl group-hover:scale-150 transition-transform duration-700 ease-out"></div>
-          <div className="absolute right-4 bottom-4 opacity-10 transform group-hover:rotate-12 transition-transform duration-700"><Briefcase size={80} strokeWidth={1} /></div>
-          
-          <div className="relative z-10 flex flex-col h-full justify-between">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20"><Briefcase size={20} className="text-blue-50" /></div>
-              <h3 className="font-bold text-blue-50 text-sm tracking-wide">ปริมาณงานทั้งหมด</h3>
-            </div>
-            <div>
-              <p className="text-5xl font-black tracking-tighter mb-2 drop-shadow-md">1,248</p>
-              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-300 bg-emerald-900/30 w-fit px-2.5 py-1 rounded-full border border-emerald-500/20 backdrop-blur-sm"><TrendingUp size={12} /> +12% จากสัปดาห์ก่อน</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative overflow-hidden rounded-3xl p-6 text-white shadow-[0_8px_30px_rgb(16,185,129,0.2)] bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-900 group">
-          <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:scale-150 transition-transform duration-700 ease-out"></div>
-          <div className="absolute bottom-0 left-0 -ml-8 -mb-8 w-24 h-24 rounded-full bg-emerald-400/20 blur-xl group-hover:scale-150 transition-transform duration-700 ease-out"></div>
-          <div className="absolute right-4 bottom-4 opacity-10 transform group-hover:-rotate-12 transition-transform duration-700"><CheckCircle size={80} strokeWidth={1} /></div>
-          
-          <div className="relative z-10 flex flex-col h-full justify-between">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20"><CheckCircle size={20} className="text-emerald-50" /></div>
-              <h3 className="font-bold text-emerald-50 text-sm tracking-wide">อัตราความสำเร็จ SLA</h3>
-            </div>
-            <div>
-              <p className="text-5xl font-black tracking-tighter mb-2 drop-shadow-md">94.2%</p>
-              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-100 bg-white/10 w-fit px-2.5 py-1 rounded-full border border-white/20 backdrop-blur-sm">
-                เป้าหมาย: 95% <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 ml-1 shadow-[0_0_8px_rgba(110,231,183,1)]"></span> ใกล้สำเร็จแล้ว
+          {/* Large Circular KPI */}
+          <div className="flex justify-center items-center relative animate-in fade-in zoom-in duration-1000 delay-300">
+            <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-full border-8 border-white/5 flex flex-col items-center justify-center relative group">
+              {/* Spinning ring */}
+              <div className="absolute inset-[-12px] border-2 border-dashed border-blue-500/30 rounded-full animate-rotate-slow"></div>
+              <div className="absolute inset-[-24px] border border-emerald-500/10 rounded-full animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '30s' }}></div>
+              
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-4 bg-emerald-500 text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-[0_0_15px_rgba(16,185,129,0.5)]">Excellent</div>
+              
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-2">Overall SLA</span>
+              <span className="text-7xl lg:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500">94.2</span>
+              <span className="text-2xl font-black text-emerald-400 mt-1">%</span>
+              
+              <div className="absolute bottom-8 flex items-center gap-2 text-emerald-400 text-xs font-bold bg-emerald-400/10 px-3 py-1 rounded-full border border-emerald-400/20">
+                <TrendingUp size={14} /> +2.4%
               </div>
             </div>
           </div>
         </div>
-
-        <SummaryCard title="งานใกล้หลุด SLA (Warning)" value="42" subtitle="ต้องการการตรวจสอบด่วน" icon={<Clock size={20} className="text-amber-600" />} bgColor="bg-amber-50" borderColor="border-amber-200/60" alert />
-        <SummaryCard title="รอการอนุมัติ (Pending)" value="15" subtitle="ต้องการการอนุมัติจาก Head" icon={<ShieldAlert size={20} className="text-indigo-600" />} bgColor="bg-indigo-50" borderColor="border-indigo-200/60" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 animate-in slide-in-from-bottom-4 duration-500 delay-100">
-        <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] lg:col-span-2 flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
-          <div className="mb-6 flex items-center justify-between">
+      {/* Main KPI Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-400">
+        <SummaryCard title="Active Jobs Today" value="156" subtitle="Across all regions" icon={<Briefcase size={20} className="text-blue-600" />} bgColor="bg-blue-50" borderColor="border-blue-200/60" />
+        <SummaryCard title="Monthly Completed" value="1,248" subtitle="Target: 1,500" icon={<CheckCircle size={20} className="text-emerald-600" />} bgColor="bg-emerald-50" borderColor="border-emerald-200/60" />
+        <SummaryCard title="Critical Incidents" value="08" subtitle="Immediate attention" icon={<AlertTriangle size={20} className="text-rose-600" />} bgColor="bg-rose-50" borderColor="border-rose-200/60" alert />
+        <SummaryCard title="Avg. CSAT Score" value="4.85" subtitle="Out of 5.00" icon={<Trophy size={20} className="text-amber-600" />} bgColor="bg-amber-50" borderColor="border-amber-200/60" />
+      </div>
+
+      {/* Analytics Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
+        {/* Trend Area Chart */}
+        <div className="lg:col-span-2 bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white/40 shadow-xl flex flex-col hover:shadow-2xl transition-all duration-500">
+          <div className="mb-8 flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">แนวโน้มปริมาณงาน (Job Volume Trends)</h2>
-              <p className="text-sm font-medium text-slate-500 mt-0.5">เปรียบเทียบงานที่รับเข้าและงานที่ปิดสำเร็จรายเดือน</p>
+              <h2 className="text-2xl font-black text-slate-800 tracking-tight">Analytics Dashboard</h2>
+              <p className="text-sm font-medium text-slate-500 mt-1">เปรียบเทียบแนวโน้มปริมาณงานและการเติบโต</p>
             </div>
-            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><TrendingUp size={20} /></div>
+            <div className="flex gap-2">
+              <button className="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-200 transition-colors">Daily</button>
+              <button className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-blue-600/20 transition-all">Monthly</button>
+            </div>
           </div>
-          <div className="h-72 w-full">
+          <div className="h-[350px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={monthlyTrendsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
-                  <linearGradient id="colorIncoming" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="colorInc" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
                     <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
                   </linearGradient>
-                  <linearGradient id="colorCompleted" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="colorComp" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
                     <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 600}} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 500}} />
-                <RechartsTooltip contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)'}} />
-                <Legend iconType="circle" wrapperStyle={{fontSize: '12px', fontWeight: 700, color: '#334155', paddingTop:'20px'}} />
-                <Area type="monotone" dataKey="incoming" name="งานรับเข้า (Incoming)" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorIncoming)" />
-                <Area type="monotone" dataKey="completed" name="ปิดงานสำเร็จ (Completed)" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorCompleted)" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 700}} dy={15} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 600}} />
+                <RechartsTooltip contentStyle={{borderRadius: '16px', border: 'none', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', padding: '16px'}} />
+                <Legend iconType="circle" verticalAlign="top" align="right" wrapperStyle={{fontSize: '12px', fontWeight: 800, color: '#334155', paddingBottom: '20px'}}/>
+                <Area type="monotone" dataKey="incoming" name="New Jobs" stroke="#3b82f6" strokeWidth={4} fillOpacity={1} fill="url(#colorInc)" />
+                <Area type="monotone" dataKey="completed" name="Resolved" stroke="#10b981" strokeWidth={4} fillOpacity={1} fill="url(#colorComp)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        <div className="flex flex-col gap-6">
-          <div className="bg-white/80 backdrop-blur-xl p-6 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex-1 flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-extrabold text-slate-800 tracking-tight">ลูกค้า Top 3 (จำแนกตาม SLA)</h2>
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 bg-slate-50/50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">BW</div>
-                  <div><p className="font-bold text-slate-800 text-sm">Bank Of Wealth</p><p className="text-xs text-slate-500 font-medium">SLA: 98%</p></div>
-                </div>
-                <div className="text-right"><p className="font-black text-slate-700">450</p><p className="text-[10px] font-bold text-slate-400">งาน/เดือน</p></div>
-              </div>
-              <div className="flex items-center justify-between p-3 bg-slate-50/50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">RC</div>
-                  <div><p className="font-bold text-slate-800 text-sm">Retail Corp</p><p className="text-xs text-slate-500 font-medium">SLA: 94%</p></div>
-                </div>
-                <div className="text-right"><p className="font-black text-slate-700">320</p><p className="text-[10px] font-bold text-slate-400">งาน/เดือน</p></div>
-              </div>
-              <div className="flex items-center justify-between p-3 bg-slate-50/50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">CA</div>
-                  <div><p className="font-bold text-slate-800 text-sm">Cafe Amazon</p><p className="text-xs text-slate-500 font-medium">SLA: 99%</p></div>
-                </div>
-                <div className="text-right"><p className="font-black text-slate-700">280</p><p className="text-[10px] font-bold text-slate-400">งาน/เดือน</p></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 animate-in slide-in-from-bottom-4 duration-500 delay-200">
-        <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">สัดส่วนประเภทงาน (Job Categories)</h2>
-              <p className="text-sm font-medium text-slate-500 mt-0.5">แบ่งตามประเภทการให้บริการ</p>
-            </div>
-            <div className="p-2 bg-blue-50 text-blue-600 rounded-xl"><PieChartIcon size={20} /></div>
-          </div>
-          <div className="flex-1 flex items-center justify-center relative min-h-[250px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie data={jobTypesData} cx="50%" cy="50%" innerRadius={70} outerRadius={100} paddingAngle={5} dataKey="value" stroke="none">
-                  {jobTypesData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
-                </Pie>
-                <RechartsTooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-              <span className="text-3xl font-black text-slate-800">1.2K</span><span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Jobs</span>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-100">
-            {jobTypesData.map(item => (
-              <div key={item.name} className="flex flex-col items-center text-center p-2 rounded-xl hover:bg-slate-50 transition-colors">
-                <div className="flex items-center gap-1.5 mb-1"><div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div><span className="text-xs font-bold text-slate-600">{item.name}</span></div>
-                <span className="text-base font-black text-slate-800">{item.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">สัดส่วนพื้นที่ (Geographical)</h2>
-                <p className="text-sm font-medium text-slate-500 mt-0.5">เปรียบเทียบภาระงานระหว่าง กทม. และ ต่างจังหวัด</p>
-              </div>
-              <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><MapPin size={20} /></div>
-            </div>
-          <div className="flex-1 flex items-center justify-center min-h-[250px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie data={jobsByRegion} cx="50%" cy="70%" startAngle={180} endAngle={0} innerRadius={80} outerRadius={120} paddingAngle={5} dataKey="value" stroke="none">
-                  {jobsByRegion.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
-                </Pie>
-                <RechartsTooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-            <div className="flex justify-center gap-8 mt-2">
-              {jobsByRegion.map(item => (
-                <div key={item.name} className="flex items-center gap-4 bg-white px-5 py-3 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${item.color}15`, color: item.color }}><MapPin size={24} /></div>
-                  <div><p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{item.name} Region</p><p className="text-2xl font-black text-slate-800">{item.value}</p></div>
+        {/* Top Technicians Leaderboard */}
+        <div className="bg-[#060b14] text-white p-8 rounded-[2rem] shadow-2xl border border-white/5 flex flex-col relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl"></div>
+          <div className="relative z-10 flex flex-col h-full">
+            <h2 className="text-xl font-black tracking-tight mb-2">TOP PERFORMERS</h2>
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-8">ประจำเดือน มีนาคม 2026</p>
+            
+            <div className="space-y-6 flex-1">
+              {[
+                { name: 'สมชาย ขยันซ่อม', score: '99.2%', jobs: 142, img: 'S' },
+                { name: 'วิชัย ไวแสง', score: '98.5%', jobs: 128, img: 'W' },
+                { name: 'ณัฐวุฒิ สุดเก๋า', score: '97.1%', jobs: 115, img: 'N' },
+                { name: 'เอกชัย ใจสู้', score: '96.8%', jobs: 102, img: 'E' },
+              ].map((tech, i) => (
+                <div key={i} className="flex items-center justify-between group/item">
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-black text-lg border border-white/10 group-hover/item:scale-110 transition-transform duration-300">
+                        {tech.img}
+                      </div>
+                      {i === 0 && <div className="absolute -top-2 -right-2 text-amber-400 bg-black/50 backdrop-blur-sm rounded-full p-1 border border-amber-400/30"><Trophy size={12} /></div>}
+                    </div>
+                    <div>
+                      <p className="font-bold text-sm group-hover/item:text-blue-400 transition-colors">{tech.name}</p>
+                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{tech.jobs} งานที่สำเร็จ</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-base font-black text-emerald-400">{tech.score}</p>
+                    <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">SLA</p>
+                  </div>
                 </div>
               ))}
             </div>
+            
+            <button className="w-full mt-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:text-blue-400 flex items-center justify-center gap-2">
+              ดูอันดับทั้งหมด <ArrowRight size={14} />
+            </button>
+          </div>
         </div>
       </div>
-    </>
+
+      {/* Final Row: Geographical & Types */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-600">
+        {/* Geo Distribution */}
+        <div className="bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white/40 shadow-xl flex flex-col hover:shadow-2xl transition-all duration-500 relative group overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl -mr-24 -mt-24 group-hover:bg-emerald-500/10 transition-colors"></div>
+          <div className="mb-6 flex items-center justify-between relative z-10">
+            <div>
+              <h2 className="text-2xl font-black text-slate-800 tracking-tight">Regional Distribution</h2>
+              <p className="text-sm font-medium text-slate-500 mt-1">เปรียบเทียบภาระงาน กทม. vs ต่างจังหวัด</p>
+            </div>
+            <div className="p-3 bg-emerald-50 text-emerald-600 rounded-2xl shadow-inner border border-emerald-100"><MapPin size={24} /></div>
+          </div>
+          <div className="flex-1 flex flex-col md:flex-row items-center gap-8 relative z-10">
+            <div className="w-full md:w-1/2 h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={jobsByRegion} cx="50%" cy="50%" innerRadius={70} outerRadius={100} paddingAngle={8} dataKey="value" stroke="none">
+                    {jobsByRegion.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} fillOpacity={0.8} />
+                    ))}
+                  </Pie>
+                  <RechartsTooltip contentStyle={{borderRadius: '16px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)'}} />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="w-full md:w-1/2 space-y-4">
+              {jobsByRegion.map(item => (
+                <div key={item.name} className="flex items-center gap-5 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all group/region">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner group-hover/region:scale-110 transition-transform" style={{ backgroundColor: `${item.color}15`, color: item.color }}><MapPin size={28} /></div>
+                  <div>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.name} Region</p>
+                    <p className="text-3xl font-black text-slate-800 tracking-tighter">{item.value}</p>
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold text-emerald-500 mt-1">
+                      <TrendingUp size={12} /> {item.name === 'BKK' ? '+5.2%' : '+8.1%'}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Categories */}
+        <div className="bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white/40 shadow-xl flex flex-col hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl -mr-24 -mt-24 group-hover:bg-blue-500/10 transition-colors"></div>
+          <div className="mb-6 flex items-center justify-between relative z-10">
+            <div>
+              <h2 className="text-2xl font-black text-slate-800 tracking-tight">Service Breakdown</h2>
+              <p className="text-sm font-medium text-slate-500 mt-1">สัดส่วนประเภทงานที่เกิดขึ้นจริง</p>
+            </div>
+            <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl shadow-inner border border-blue-100"><PieChartIcon size={24} /></div>
+          </div>
+          <div className="flex-1 flex flex-col md:flex-row items-center gap-8 relative z-10">
+            <div className="w-full md:w-1/2 h-64 relative">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={jobTypesData} cx="50%" cy="50%" innerRadius={70} outerRadius={105} paddingAngle={5} dataKey="value" stroke="none">
+                    {jobTypesData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} fillOpacity={0.8} />
+                    ))}
+                  </Pie>
+                  <RechartsTooltip contentStyle={{borderRadius: '16px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)'}} />
+                </PieChart>
+              </ResponsiveContainer>
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <span className="text-4xl font-black text-slate-800 tracking-tighter">1.2K</span>
+                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Total Ops</span>
+              </div>
+            </div>
+            <div className="w-full md:w-1/2 grid grid-cols-2 gap-3">
+              {jobTypesData.map(item => (
+                <div key={item.name} className="flex flex-col p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all group/cat">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }}></div>
+                    <span className="text-[10px] font-bold text-slate-500 uppercase truncate">{item.name}</span>
+                  </div>
+                  <span className="text-2xl font-black text-slate-800 tracking-tighter group-hover/cat:text-blue-600 transition-colors">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
