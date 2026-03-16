@@ -7,7 +7,7 @@ import {
 } from 'recharts';
 import { 
   CheckCircle, Bell, Briefcase, Wrench, ChevronDown, 
-  Activity, Calendar, Clock, LogOut, MapPin, TrendingUp, Star, Phone, MessageSquare, Download
+  Activity, Calendar, Clock, LogOut, MapPin, TrendingUp, Star, Phone, MessageSquare, Download, ArrowRight, FileText, Search
 } from "lucide-react";
 import { SummaryCard, SlaBadge } from "./SharedComponents";
 import { recentJobs } from "./data";
