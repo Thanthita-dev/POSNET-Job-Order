@@ -10,7 +10,7 @@ import {
   AlertTriangle, CheckCircle, Clock, Search, Bell, Menu,
   Briefcase, Wrench, User, ChevronDown, MapPin, 
   Activity, ShieldAlert, Calendar, Filter, FileCheck2, TrendingUp, PieChart as PieChartIcon,
-  Download, MoreHorizontal, ArrowUpDown, X, Cpu, MessageSquare, Truck, PenTool, Settings, FileText, CheckSquare, Square, LogOut, Moon, Sun, ArrowRight, Zap, Award, History, Trophy
+  Download, MoreHorizontal, ArrowUpDown, X, Cpu, MessageSquare, Truck, PenTool, Settings, FileText, CheckSquare, Square, LogOut, Moon, Sun, ArrowRight, Zap, Award, History, Trophy, Plus
 } from "lucide-react";
 import dynamic from 'next/dynamic';
 

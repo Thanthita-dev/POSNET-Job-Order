@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, UploadCloud, FileCheck2, Cpu, CheckCircle, MapPin, FileText, Wrench, Activity, AlertCircle } from "lucide-react";
+import { X, UploadCloud, FileCheck2, Cpu, CheckCircle, MapPin, FileText, Wrench, Activity, AlertCircle, Plus, Zap } from "lucide-react";
 
 export function SummaryCard({ title, value, subtitle, icon, bgColor, borderColor, alert }: any) {
   return (
