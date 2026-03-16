@@ -207,20 +207,7 @@ export default function LoginPage() {
               )}
             </button>
 
-            {/* Mobile Biometrics */}
-            {role === 'staff' && (
-              <div className="pt-6 border-t border-slate-200/60 text-center animate-in fade-in slide-in-from-bottom-2 duration-500">
-                <p className="text-xs font-bold text-slate-500 mb-4 tracking-wide">หรือเข้าสู่ระบบแบบรวดเร็ว</p>
-                <div className="flex justify-center gap-5">
-                  <button type="button" onClick={handleLogin} className="p-4 bg-white border border-slate-200 shadow-sm rounded-2xl hover:bg-slate-50 hover:border-blue-300 transition-all text-slate-600 hover:text-blue-600 hover:scale-110 active:scale-95">
-                    <ScanFace size={32} strokeWidth={1.5} />
-                  </button>
-                  <button type="button" onClick={handleLogin} className="p-4 bg-white border border-slate-200 shadow-sm rounded-2xl hover:bg-slate-50 hover:border-blue-300 transition-all text-slate-600 hover:text-blue-600 hover:scale-110 active:scale-95">
-                    <Fingerprint size={32} strokeWidth={1.5} />
-                  </button>
-                </div>
-              </div>
-            )}
+
           </form>
 
           <p className="text-center text-xs font-bold text-slate-400 mt-10 relative z-10">
