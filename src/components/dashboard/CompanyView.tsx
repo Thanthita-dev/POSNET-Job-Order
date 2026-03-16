@@ -388,7 +388,7 @@ function CustomerAccountsContent() {
   );
 }
 
-export function CompanyView({ openModal }: { openModal: (id: string) => void }) {
+export function CompanyView({ openModal, openCreateModal }: { openModal: (id: string) => void, openCreateModal: () => void }) {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState("executive"); 
@@ -489,10 +489,10 @@ export function CompanyView({ openModal }: { openModal: (id: string) => void }) 
         </header>
 
         <div className="flex-1 overflow-auto px-4 sm:px-6 lg:px-10 pb-10 no-scrollbar">
-          {activeTab === 'executive' && <ExecutiveDashboardContent openModal={openModal} />}
+          {activeTab === 'executive' && <ExecutiveDashboardContent openModal={openModal} openCreateModal={openCreateModal} />}
           {activeTab === 'command' && <CommandCenterContent openModal={openModal} />}
           {activeTab === 'map' && <TechnicianMapContent />}
-          {activeTab === 'all-jobs' && <AllJobOrdersContent openModal={openModal} openDetails={(id) => setSelectedJobDetailsId(id)} />}
+          {activeTab === 'all-jobs' && <AllJobOrdersContent openModal={openModal} openDetails={(id) => setSelectedJobDetailsId(id)} openCreateModal={openCreateModal} />}
           {activeTab === 'reports' && <ReportGeneratorContent />}
           {activeTab === 'sla-tracker' && <SlaTrackerContent />}
           {activeTab === 'customers' && <CustomerAccountsContent />}
@@ -507,7 +507,7 @@ export function CompanyView({ openModal }: { openModal: (id: string) => void }) 
   );
 }
 
-function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => void }) {
+function ExecutiveDashboardContent({ openModal, openCreateModal }: { openModal: (id: string) => void, openCreateModal: () => void }) {
   return (
     <div className="space-y-8 pb-12 animate-in fade-in duration-700">
       {/* Refined Premium Header */}
@@ -526,6 +526,11 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
             <p className="text-slate-500 text-base max-w-lg font-medium leading-relaxed">
               สรุปภาพรวมการดำเนินงานและวิเคราะห์ประสิทธิภาพระบบแบบเรียลไทม์ <br className="hidden lg:block" />เพื่อการบริหารจัดการที่รวดเร็วและแม่นยำ
             </p>
+            <div className="pt-2 flex flex-wrap justify-center lg:justify-start gap-3">
+               <button onClick={openCreateModal} className="px-6 py-3 bg-slate-900 text-white font-black text-xs rounded-xl shadow-lg hover:bg-black transition-all hover:-translate-y-0.5 flex items-center gap-2">
+                 <Plus size={16} strokeWidth={3} /> สร้างใบสั่งงานใหม่
+               </button>
+            </div>
           </div>
 
           <div className="flex items-center gap-8 bg-slate-50/50 backdrop-blur-sm p-6 rounded-[2rem] border border-slate-100 shadow-inner">
@@ -977,7 +982,7 @@ function CommandCenterContent({ openModal }: { openModal: (id: string) => void }
   );
 }
 
-function AllJobOrdersContent({ openModal, openDetails }: { openModal: (id: string) => void, openDetails: (id: string) => void }) {
+function AllJobOrdersContent({ openModal, openDetails, openCreateModal }: { openModal: (id: string) => void, openDetails: (id: string) => void, openCreateModal: () => void }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
 
@@ -989,17 +994,20 @@ function AllJobOrdersContent({ openModal, openDetails }: { openModal: (id: strin
 
   return (
     <div className="animate-in slide-in-from-bottom-4 duration-500 h-full flex flex-col">
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-6 flex flex-col md:flex-row gap-4 justify-between items-center shrink-0">
+      <div className="bg-white/80 backdrop-blur-xl p-5 rounded-[2rem] border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] mb-6 flex flex-col md:flex-row gap-4 justify-between items-center shrink-0">
         <div className="relative w-full md:w-96 group">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={18} />
-          <input type="text" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+          <input type="text" placeholder="ค้นหาใบงาน หรือ ชื่อลูกค้า..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-medium focus:outline-none focus:ring-4 focus:ring-blue-500/10 transition-all shadow-sm" />
         </div>
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-slate-50 border border-slate-200 text-slate-800 font-medium px-3 py-2 rounded-lg text-sm focus:outline-none">
-            <option value="All">All Statuses</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-2xl text-xs focus:outline-none shadow-sm cursor-pointer">
+            <option value="All">ทุกสถานะงาน</option>
+            <option value="In Progress">กำลังดำเนินการ</option>
+            <option value="Completed">เสร็จสิ้น</option>
           </select>
+          <button onClick={openCreateModal} className="px-6 py-3 bg-slate-900 text-white font-black text-xs rounded-2xl shadow-lg shadow-slate-900/20 hover:bg-black transition-all hover:-translate-y-0.5 flex items-center gap-2">
+            <Plus size={16} strokeWidth={3} /> สร้างใบสั่งงานใหม่
+          </button>
         </div>
       </div>
 

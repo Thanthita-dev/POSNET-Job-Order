@@ -7,7 +7,7 @@ import { RefreshCw } from "lucide-react";
 import { CompanyView } from "../components/dashboard/CompanyView";
 import { CustomerView } from "../components/dashboard/CustomerView";
 import { StaffMobileView } from "../components/dashboard/StaffMobileView";
-import { CloseJobModal } from "../components/dashboard/SharedComponents";
+import { CloseJobModal, CreateJobModal } from "../components/dashboard/SharedComponents";
 
 export default function DashboardPage() {
   return (
@@ -29,6 +29,7 @@ function DashboardRouter() {
   }, [role, router]);
 
   const [isCloseJobModalOpen, setIsCloseJobModalOpen] = useState(false);
+  const [isCreateJobModalOpen, setIsCreateJobModalOpen] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState("");
 
   if (!role) {
@@ -41,14 +42,18 @@ function DashboardRouter() {
   };
 
   const closeJobModal = () => setIsCloseJobModalOpen(false);
+  
+  const openCreateJobModal = () => setIsCreateJobModalOpen(true);
+  const closeCreateJobModal = () => setIsCreateJobModalOpen(false);
 
   return (
     <>
-      {role === "company" && <CompanyView openModal={openCloseJobModal} />}
+      {role === "company" && <CompanyView openModal={openCloseJobModal} openCreateModal={openCreateJobModal} />}
       {role === "customer" && <CustomerView openModal={openCloseJobModal} />}
       {role === "staff" && <StaffMobileView openModal={openCloseJobModal} />}
       
       {isCloseJobModalOpen && <CloseJobModal jobId={selectedJobId} onClose={closeJobModal} />}
+      {isCreateJobModalOpen && <CreateJobModal onClose={closeCreateJobModal} />}
     </>
   );
 }
