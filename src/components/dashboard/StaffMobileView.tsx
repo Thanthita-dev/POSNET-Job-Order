@@ -9,14 +9,15 @@ import {
 import { SlaBadge } from "./SharedComponents";
 import { recentJobs, allJobsData } from "./data";
 
-export function StaffMobileView({ openModal }: { openModal: (id: string) => void }) {
+export function StaffMobileView({ jobs, openModal }: { jobs: any[], openModal: (id: string) => void }) {
   const router = useRouter();
   const [isOnline, setIsOnline] = useState(true);
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const [activeTab, setActiveTab] = useState("tasks"); // "tasks" | "map" | "history" | "profile"
 
   // Filter history jobs for the technician (mocking "Somchai")
-  const historyJobs = allJobsData.filter(job => job.tech === "Somchai" && job.status !== "In Progress" && job.status !== "Pending");
+  const historyJobs = jobs.filter(job => job.tech === "Somchai" && job.status !== "In Progress" && job.status !== "Pending");
+  const currentTasks = jobs.filter(job => job.tech === "Somchai" && (job.status === "In Progress" || job.status === "Pending"));
 
   return (
     <div className="min-h-screen bg-slate-900 flex justify-center font-sans sm:p-6">
@@ -87,11 +88,11 @@ export function StaffMobileView({ openModal }: { openModal: (id: string) => void
               {/* Task List */}
               <div className="flex justify-between items-center mb-3">
                 <h2 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">งานวันนี้</h2>
-                <span className="text-[10px] font-bold text-slate-400">เหลือ 3 งาน</span>
+                <span className="text-[10px] font-bold text-slate-400">เหลือ {currentTasks.length} งาน</span>
               </div>
 
               <div className="space-y-4">
-                {recentJobs.slice(0,2).map((job) => (
+                {currentTasks.map((job) => (
                   <div key={job.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden">
                     {job.status === 'In Progress' && <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>}
                     

@@ -261,10 +261,39 @@ export function JobDetailsModal({ jobId, onClose }: { jobId: string, onClose: ()
     </div>
   );
 }
-export function CreateJobModal({ onClose }: { onClose: () => void }) {
+export function CreateJobModal({ onClose, onAddJob }: { onClose: () => void, onAddJob: (job: any) => void }) {
+  const [formData, setFormData] = useState({
+    customer: "Bank Of Wealth",
+    branch: "",
+    type: "Install",
+    subType: "Hardware",
+    desc: "",
+    date: new Date().toISOString().split('T')[0],
+    tech: "ยังไม่มอบหมาย (Unassigned)",
+    area: "BKK",
+    isCritical: false
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newJob = {
+      id: `JOB-2026-${Math.floor(100 + Math.random() * 900)}`,
+      customer: formData.customer,
+      branch: formData.branch || "General",
+      type: formData.type,
+      subType: formData.subType,
+      status: "Pending",
+      sla: formData.isCritical ? "Warning" : "On Time",
+      date: formData.date,
+      tech: formData.tech,
+      area: formData.area
+    };
+    onAddJob(newJob);
+  };
+
   return (
     <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-300 border border-white/20">
+      <form onSubmit={handleSubmit} className="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-300 border border-white/20">
         
         {/* Modal Header */}
         <div className="px-8 py-6 border-b border-slate-100 flex justify-between items-center bg-gradient-to-r from-slate-50 to-white shrink-0">
@@ -272,7 +301,7 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
             <h3 className="text-2xl font-black text-slate-800 tracking-tight">สร้างใบสั่งงานใหม่</h3>
             <p className="text-sm text-slate-500 font-medium">กรอกรายละเอียดเพื่อเปิด Job Order ในระบบ</p>
           </div>
-          <button onClick={onClose} className="p-3 hover:bg-slate-100 rounded-2xl transition-all text-slate-400 hover:text-slate-600">
+          <button type="button" onClick={onClose} className="p-3 hover:bg-slate-100 rounded-2xl transition-all text-slate-400 hover:text-slate-600">
             <X size={24} />
           </button>
         </div>
@@ -286,8 +315,11 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 ml-1">ลูกค้า (Customer)</label>
-                <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none">
-                  <option>เลือกบัญชีลูกค้า</option>
+                <select 
+                  value={formData.customer}
+                  onChange={(e) => setFormData({...formData, customer: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none"
+                >
                   <option>Bank Of Wealth</option>
                   <option>Retail Corp</option>
                   <option>Cafe Amazon</option>
@@ -295,7 +327,13 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 ml-1">สาขา (Branch)</label>
-                <input type="text" placeholder="ระบุชื่อสาขา" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none" />
+                <input 
+                  type="text" 
+                  value={formData.branch}
+                  onChange={(e) => setFormData({...formData, branch: e.target.value})}
+                  placeholder="ระบุชื่อสาขา" 
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none" 
+                />
               </div>
             </div>
           </div>
@@ -306,16 +344,24 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 ml-1">ประเภทงาน (Job Type)</label>
-                <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none">
-                  <option>Install (ติดตั้ง)</option>
-                  <option>Service (ซ่อมบำรุง)</option>
-                  <option>PM (บำรุงรักษา)</option>
+                <select 
+                  value={formData.type}
+                  onChange={(e) => setFormData({...formData, type: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none"
+                >
+                  <option>Install</option>
+                  <option>Service</option>
+                  <option>PM</option>
                   <option>Reprogram</option>
                 </select>
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 ml-1">ประเภทอุปกรณ์ (Sub-Type)</label>
-                <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none">
+                <select 
+                  value={formData.subType}
+                  onChange={(e) => setFormData({...formData, subType: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none"
+                >
                   <option>Hardware</option>
                   <option>Software / Setting</option>
                   <option>SIM Card</option>
@@ -325,7 +371,13 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
             </div>
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700 ml-1">อาการเสีย / รายละเอียดงาน</label>
-              <textarea placeholder="ระบุอาการเสีย หรือสิ่งที่ต้องการให้ช่างดำเนินการ..." rows={3} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none resize-none"></textarea>
+              <textarea 
+                value={formData.desc}
+                onChange={(e) => setFormData({...formData, desc: e.target.value})}
+                placeholder="ระบุอาการเสีย หรือสิ่งที่ต้องการให้ช่างดำเนินการ..." 
+                rows={3} 
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none resize-none"
+              ></textarea>
             </div>
           </div>
 
@@ -335,15 +387,24 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 ml-1">วันที่นัดหมาย (Target Date)</label>
-                <input type="date" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none" />
+                <input 
+                  type="date" 
+                  value={formData.date}
+                  onChange={(e) => setFormData({...formData, date: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none" 
+                />
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 ml-1">มอบหมายช่าง (Assign Technician)</label>
-                <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none">
+                <select 
+                  value={formData.tech}
+                  onChange={(e) => setFormData({...formData, tech: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none"
+                >
                   <option>ยังไม่มอบหมาย (Unassigned)</option>
-                  <option>สมชาย ขยันซ่อม</option>
-                  <option>วิชัย ไวแสง</option>
-                  <option>ณัฐวุฒิ สุดเก๋า</option>
+                  <option>Somchai</option>
+                  <option>Wichai</option>
+                  <option>Nattawut</option>
                 </select>
               </div>
             </div>
@@ -352,8 +413,16 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 ml-1">พื้นที่ (Area)</label>
                 <div className="flex gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
-                  <button className="flex-1 py-2 rounded-lg bg-white shadow-sm text-xs font-bold text-blue-600 border border-blue-100">BKK</button>
-                  <button className="flex-1 py-2 rounded-lg text-xs font-bold text-slate-500 hover:bg-white/50 transition-colors">UPC</button>
+                  <button 
+                    type="button" 
+                    onClick={() => setFormData({...formData, area: "BKK"})}
+                    className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${formData.area === "BKK" ? 'bg-white shadow-sm text-blue-600 border border-blue-100' : 'text-slate-500 hover:bg-white/50'}`}
+                  >BKK</button>
+                  <button 
+                    type="button" 
+                    onClick={() => setFormData({...formData, area: "UPC"})}
+                    className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${formData.area === "UPC" ? 'bg-white shadow-sm text-blue-600 border border-blue-100' : 'text-slate-500 hover:bg-white/50'}`}
+                  >UPC</button>
                 </div>
               </div>
             </div>
@@ -366,8 +435,12 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
                   <p className="text-[10px] text-slate-500 font-medium">ระบบจะส่งแจ้งเตือนหาช่างและ Head ทันที</p>
                 </div>
               </div>
-              <button className="w-12 h-6 bg-slate-200 rounded-full p-1 relative">
-                <div className="w-4 h-4 bg-white rounded-full shadow-sm translate-x-0 transition-transform"></div>
+              <button 
+                type="button" 
+                onClick={() => setFormData({...formData, isCritical: !formData.isCritical})}
+                className={`w-12 h-6 rounded-full p-1 relative transition-colors ${formData.isCritical ? 'bg-blue-600' : 'bg-slate-200'}`}
+              >
+                <div className={`w-4 h-4 bg-white rounded-full shadow-sm transition-transform ${formData.isCritical ? 'translate-x-6' : 'translate-x-0'}`}></div>
               </button>
             </div>
           </div>
@@ -377,17 +450,18 @@ export function CreateJobModal({ onClose }: { onClose: () => void }) {
         {/* Modal Footer */}
         <div className="px-8 py-6 border-t border-slate-100 bg-slate-50/50 flex justify-end gap-4 shrink-0">
           <button 
+            type="button"
             onClick={onClose}
             className="px-6 py-3 text-sm font-bold text-slate-500 hover:bg-slate-100 rounded-xl transition-all">
             ยกเลิก
           </button>
           <button 
-            onClick={onClose}
+            type="submit"
             className="px-10 py-3 bg-gradient-to-r from-slate-800 to-black text-white text-sm font-black rounded-xl shadow-xl shadow-slate-900/20 hover:-translate-y-1 transition-all active:scale-95 flex items-center gap-2">
             <Plus size={18} strokeWidth={3} /> สร้างใบงาน (Create Job)
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

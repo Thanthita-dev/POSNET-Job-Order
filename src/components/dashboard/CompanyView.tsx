@@ -199,7 +199,7 @@ function TechnicianMapContent() {
 }
 
 // --- Report Generator Content ---
-function ReportGeneratorContent() {
+function ReportGeneratorContent({ jobs }: { jobs: any[] }) {
   const availableColumns = [
     'Job ID', 'Customer', 'Branch', 'Target Date', 'Actual Date', 
     'Job Type', 'Sub Type', 'Region', 'Technician', 'Status', 'SLA Status', 'TID', 'MID', 'Hardware S/N'
@@ -213,6 +213,38 @@ function ReportGeneratorContent() {
 
   const selectAll = () => setSelectedCols(availableColumns);
   const deselectAll = () => setSelectedCols([]);
+
+  const handleExport = () => {
+    // 1. Generate CSV
+    const headers = selectedCols.join(",");
+    const rows = jobs.map(job => {
+      return selectedCols.map(col => {
+        let val = "";
+        if (col === 'Job ID') val = job.id;
+        else if (col === 'Customer') val = job.customer;
+        else if (col === 'Branch') val = job.branch;
+        else if (col === 'Date') val = job.date;
+        else if (col === 'Job Type') val = job.type;
+        else if (col === 'Region') val = job.area;
+        else if (col === 'Technician') val = job.tech;
+        else if (col === 'Status') val = job.status;
+        else if (col === 'SLA Status') val = job.sla;
+        
+        val = String(val).replace(/"/g, '""');
+        return `"${val}"`;
+      }).join(",");
+    });
+
+    const csvContent = [headers, ...rows].join("\n");
+    const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `POSNET_Report_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="animate-in fade-in duration-500 h-full flex flex-col pb-6">
@@ -298,10 +330,10 @@ function ReportGeneratorContent() {
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t border-slate-100">
-          <button className="w-full sm:w-auto px-5 py-2.5 bg-white border border-slate-200 text-slate-700 text-sm font-bold rounded-xl shadow-sm hover:bg-slate-50 flex items-center justify-center gap-2 transition-colors">
+          <button type="button" className="w-full sm:w-auto px-5 py-2.5 bg-white border border-slate-200 text-slate-700 text-sm font-bold rounded-xl shadow-sm hover:bg-slate-50 flex items-center justify-center gap-2 transition-colors">
             <Search size={16} /> ดูตัวอย่าง ({selectedCols.length} คอลัมน์)
           </button>
-          <button className="w-full sm:w-auto px-6 py-2.5 bg-emerald-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-emerald-600/30 hover:bg-emerald-700 flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed" disabled={selectedCols.length === 0}>
+          <button type="button" onClick={handleExport} className="w-full sm:w-auto px-6 py-2.5 bg-emerald-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-emerald-600/30 hover:bg-emerald-700 flex items-center justify-center gap-2 transition-transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed" disabled={selectedCols.length === 0}>
             <Download size={16} /> ส่งออก Excel / CSV
           </button>
         </div>
@@ -388,7 +420,7 @@ function CustomerAccountsContent() {
   );
 }
 
-export function CompanyView({ openModal, openCreateModal }: { openModal: (id: string) => void, openCreateModal: () => void }) {
+export function CompanyView({ jobs, openModal, openCreateModal }: { jobs: any[], openModal: (id: string) => void, openCreateModal: () => void }) {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState("executive"); 
@@ -490,11 +522,11 @@ export function CompanyView({ openModal, openCreateModal }: { openModal: (id: st
 
         <div className="flex-1 overflow-auto px-4 sm:px-6 lg:px-10 pb-10 no-scrollbar">
           {activeTab === 'executive' && <ExecutiveDashboardContent openModal={openModal} openCreateModal={openCreateModal} />}
-          {activeTab === 'command' && <CommandCenterContent openModal={openModal} />}
+          {activeTab === 'command' && <CommandCenterContent jobs={jobs} openModal={openModal} />}
           {activeTab === 'map' && <TechnicianMapContent />}
-          {activeTab === 'all-jobs' && <AllJobOrdersContent openModal={openModal} openDetails={(id) => setSelectedJobDetailsId(id)} openCreateModal={openCreateModal} />}
-          {activeTab === 'reports' && <ReportGeneratorContent />}
-          {activeTab === 'sla-tracker' && <SlaTrackerContent />}
+          {activeTab === 'all-jobs' && <AllJobOrdersContent jobs={jobs} openModal={openModal} openDetails={(id) => setSelectedJobDetailsId(id)} openCreateModal={openCreateModal} />}
+          {activeTab === 'reports' && <ReportGeneratorContent jobs={jobs} />}
+          {activeTab === 'sla-tracker' && <SlaTrackerContent jobs={jobs} />}
           {activeTab === 'customers' && <CustomerAccountsContent />}
           {activeTab === 'settings' && <SettingsView />}
         </div>
@@ -719,7 +751,7 @@ function ExecutiveDashboardContent({ openModal, openCreateModal }: { openModal: 
 }
 
 // --- SLA Tracker Content ---
-function SlaTrackerContent() {
+function SlaTrackerContent({ jobs }: { jobs: any[] }) {
   return (
     <div className="animate-in fade-in duration-500 h-full flex flex-col pb-6">
       <div className="flex justify-between items-center mb-6 shrink-0">
@@ -791,7 +823,7 @@ function SlaTrackerContent() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {allJobsData.filter(j => j.sla === 'Warning' || j.sla === 'Missed').map(job => (
+              {jobs.filter(j => j.sla === 'Warning' || j.sla === 'Missed').map(job => (
                 <tr key={job.id} className="hover:bg-slate-50 transition-colors">
                   <td className="py-3 px-5 font-bold text-slate-800">{job.id}</td>
                   <td className="py-3 px-5 text-slate-700">{job.customer}</td>
@@ -811,7 +843,7 @@ function SlaTrackerContent() {
   );
 }
 
-function CommandCenterContent({ openModal }: { openModal: (id: string) => void }) {
+function CommandCenterContent({ jobs, openModal }: { jobs: any[], openModal: (id: string) => void }) {
   return (
     <div className="animate-in slide-in-from-bottom-4 duration-500">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white/60 backdrop-blur-xl p-3 lg:p-4 rounded-2xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-in fade-in duration-300">
@@ -977,11 +1009,11 @@ function CommandCenterContent({ openModal }: { openModal: (id: string) => void }
   );
 }
 
-function AllJobOrdersContent({ openModal, openDetails, openCreateModal }: { openModal: (id: string) => void, openDetails: (id: string) => void, openCreateModal: () => void }) {
+function AllJobOrdersContent({ jobs, openModal, openDetails, openCreateModal }: { jobs: any[], openModal: (id: string) => void, openDetails: (id: string) => void, openCreateModal: () => void }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
 
-  const filteredJobs = allJobsData.filter(job => {
+  const filteredJobs = jobs.filter(job => {
     const matchesSearch = job.id.toLowerCase().includes(searchTerm.toLowerCase()) || job.customer.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "All" || job.status === statusFilter;
     return matchesSearch && matchesStatus;
