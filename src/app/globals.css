@@ -24,3 +24,34 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Improved Dark Mode implementation for Mockup using CSS Filters */
+html.dark-theme {
+  filter: invert(1) hue-rotate(180deg) contrast(0.9) brightness(1.1);
+  background-color: #0f172a;
+}
+
+/* Remove all shadows because inverting a dark shadow creates an ugly white glow */
+html.dark-theme * {
+  box-shadow: none !important;
+}
+
+/* Revert the filter for images, maps, and specific elements so they look normal */
+html.dark-theme img,
+html.dark-theme .leaflet-container,
+html.dark-theme video,
+html.dark-theme .recharts-surface {
+  filter: invert(1) hue-rotate(180deg) contrast(1.1) brightness(0.9);
+}
+
+/* Sidebar is originally dark. The first invert makes it light. 
+   We invert it again to keep it dark. */
+html.dark-theme aside {
+  filter: invert(1) hue-rotate(180deg) contrast(1.1) brightness(0.9);
+  /* Adjusting background so when inverted it matches the aesthetic */
+  background-color: #ffffff !important;
+}
+html.dark-theme aside img,
+html.dark-theme aside svg {
+  filter: invert(1) hue-rotate(180deg) contrast(1.1) brightness(0.9);
+}
