@@ -428,7 +428,7 @@ export function CompanyView({ jobs, openModal, openCreateModal }: { jobs: any[],
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState("executive");
-  const [isLightMode, setIsLightMode] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(true);
   const [selectedJobDetailsId, setSelectedJobDetailsId] = useState<string | null>(null);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
