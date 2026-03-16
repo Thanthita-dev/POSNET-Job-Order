@@ -391,7 +391,7 @@ function CustomerAccountsContent() {
 export function CompanyView({ openModal }: { openModal: (id: string) => void }) {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [activeTab, setActiveTab] = useState("reports"); 
+  const [activeTab, setActiveTab] = useState("executive"); 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [selectedJobDetailsId, setSelectedJobDetailsId] = useState<string | null>(null);
 
