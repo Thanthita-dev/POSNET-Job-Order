@@ -52,6 +52,11 @@ function DashboardRouter() {
   const handleAddJob = (newJob: any) => {
     setJobs([newJob, ...jobs]);
     setIsCreateJobModalOpen(false);
+    
+    // Show success notification
+    setTimeout(() => {
+      alert("สร้างใบงานใหม่เรียบร้อยแล้ว!");
+    }, 300);
   };
 
   return (
