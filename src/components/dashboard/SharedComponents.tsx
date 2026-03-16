@@ -5,17 +5,18 @@ import { X, UploadCloud, FileCheck2, Cpu, CheckCircle, MapPin, FileText, Wrench,
 
 export function SummaryCard({ title, value, subtitle, icon, bgColor, borderColor, alert }: any) {
   return (
-    <div className={`bg-white p-4 lg:p-5 rounded-2xl border ${borderColor} shadow-sm flex flex-col justify-between group hover:shadow-md transition-all duration-300 relative overflow-hidden`}>
-      {alert && <span className="absolute top-4 right-4 w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>}
-      <div className="flex justify-between items-start mb-2 lg:mb-3 relative z-10">
-        <div className={`p-2 rounded-lg ${bgColor} border ${borderColor} shadow-inner`}>
+    <div className={`bg-white/80 backdrop-blur-xl p-5 lg:p-6 rounded-3xl border ${borderColor} shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col justify-between group hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden`}>
+      {alert && <span className="absolute top-5 right-5 w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>}
+      {alert && <span className="absolute top-5 right-5 w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]"></span>}
+      <div className="flex justify-between items-start mb-4 relative z-10">
+        <div className={`p-2.5 rounded-xl ${bgColor} text-slate-700`}>
           {icon}
         </div>
       </div>
-      <div className="relative z-10">
-        <p className="text-2xl lg:text-3xl font-black text-slate-800 tracking-tight">{value}</p>
-        <h3 className="text-slate-600 text-xs lg:text-sm font-bold mt-1">{title}</h3>
-        <p className="text-[10px] lg:text-xs text-slate-400 font-medium mt-0.5">{subtitle}</p>
+      <div className="relative z-10 mt-auto">
+        <p className="text-3xl lg:text-4xl font-black text-slate-800 tracking-tighter">{value}</p>
+        <h3 className="text-slate-700 text-sm font-extrabold mt-1 tracking-tight">{title}</h3>
+        <p className="text-[11px] text-slate-500 font-medium mt-1">{subtitle}</p>
       </div>
     </div>
   );

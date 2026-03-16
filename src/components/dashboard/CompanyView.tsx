@@ -504,20 +504,20 @@ export function CompanyView({ openModal }: { openModal: (id: string) => void }) 
 function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => void }) {
   return (
     <>
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white p-3 lg:p-4 rounded-xl border border-slate-200 shadow-sm animate-in fade-in duration-300">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white/60 backdrop-blur-xl p-3 lg:p-4 rounded-2xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-in fade-in duration-300">
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs sm:text-sm w-full sm:w-auto">
-            <Filter size={14} className="text-slate-500" />
-            <span className="font-semibold text-slate-700 whitespace-nowrap">Customer:</span>
-            <select className="bg-transparent border-none text-slate-600 font-medium focus:outline-none cursor-pointer w-full">
+          <div className="flex items-center gap-2 bg-white/80 border border-slate-200/60 shadow-sm rounded-xl px-4 py-2 text-xs sm:text-sm w-full sm:w-auto transition-all hover:shadow-md">
+            <Filter size={14} className="text-blue-500" />
+            <span className="font-bold text-slate-700 whitespace-nowrap">Customer:</span>
+            <select className="bg-transparent border-none text-slate-600 font-semibold focus:outline-none cursor-pointer w-full">
               <option>All Accounts</option>
               <option>Bank Of Wealth</option>
               <option>Retail Corp</option>
             </select>
           </div>
-          <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs sm:text-sm w-full sm:w-auto">
-            <Calendar size={14} className="text-slate-500" />
-            <select className="bg-transparent border-none text-slate-600 font-medium focus:outline-none cursor-pointer w-full">
+          <div className="flex items-center gap-2 bg-white/80 border border-slate-200/60 shadow-sm rounded-xl px-4 py-2 text-xs sm:text-sm w-full sm:w-auto transition-all hover:shadow-md">
+            <Calendar size={14} className="text-emerald-500" />
+            <select className="bg-transparent border-none text-slate-600 font-semibold focus:outline-none cursor-pointer w-full">
               <option>Today (Live)</option>
               <option>This Week</option>
               <option>This Month</option>
@@ -528,31 +528,55 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8 animate-in slide-in-from-bottom-4 duration-500">
-        <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-5 rounded-2xl shadow-lg shadow-blue-900/20 text-white relative overflow-hidden group">
-          <div className="absolute -right-4 -top-4 opacity-20 transform group-hover:scale-110 transition-transform duration-500"><Briefcase size={100} /></div>
-          <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-2"><div className="p-1.5 bg-white/20 rounded-lg backdrop-blur-sm"><Briefcase size={18} /></div><h3 className="font-bold text-blue-100 text-sm">Total Job Orders</h3></div>
-            <p className="text-4xl font-black tracking-tight mb-1">1,248</p>
-            <div className="flex items-center gap-1 text-xs font-medium text-emerald-300"><TrendingUp size={14} /> +12% from last week</div>
+        <div className="relative overflow-hidden rounded-3xl p-6 text-white shadow-[0_8px_30px_rgb(37,99,235,0.2)] bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-900 group">
+          <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:scale-150 transition-transform duration-700 ease-out"></div>
+          <div className="absolute bottom-0 left-0 -ml-8 -mb-8 w-24 h-24 rounded-full bg-blue-400/20 blur-xl group-hover:scale-150 transition-transform duration-700 ease-out"></div>
+          <div className="absolute right-4 bottom-4 opacity-10 transform group-hover:rotate-12 transition-transform duration-700"><Briefcase size={80} strokeWidth={1} /></div>
+          
+          <div className="relative z-10 flex flex-col h-full justify-between">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20"><Briefcase size={20} className="text-blue-50" /></div>
+              <h3 className="font-bold text-blue-50 text-sm tracking-wide">Total Job Orders</h3>
+            </div>
+            <div>
+              <p className="text-5xl font-black tracking-tighter mb-2 drop-shadow-md">1,248</p>
+              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-300 bg-emerald-900/30 w-fit px-2.5 py-1 rounded-full border border-emerald-500/20 backdrop-blur-sm"><TrendingUp size={12} /> +12% from last week</div>
+            </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-emerald-500 to-emerald-700 p-5 rounded-2xl shadow-lg shadow-emerald-900/20 text-white relative overflow-hidden group">
-          <div className="absolute -right-4 -top-4 opacity-20 transform group-hover:scale-110 transition-transform duration-500"><CheckCircle size={100} /></div>
-          <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-2"><div className="p-1.5 bg-white/20 rounded-lg backdrop-blur-sm"><CheckCircle size={18} /></div><h3 className="font-bold text-emerald-100 text-sm">Overall SLA Success</h3></div>
-            <p className="text-4xl font-black tracking-tight mb-1">94.2%</p>
-            <div className="flex items-center gap-1 text-xs font-medium text-emerald-200">Target: 95% <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 ml-1"></span> Almost there</div>
+        <div className="relative overflow-hidden rounded-3xl p-6 text-white shadow-[0_8px_30px_rgb(16,185,129,0.2)] bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-900 group">
+          <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:scale-150 transition-transform duration-700 ease-out"></div>
+          <div className="absolute bottom-0 left-0 -ml-8 -mb-8 w-24 h-24 rounded-full bg-emerald-400/20 blur-xl group-hover:scale-150 transition-transform duration-700 ease-out"></div>
+          <div className="absolute right-4 bottom-4 opacity-10 transform group-hover:-rotate-12 transition-transform duration-700"><CheckCircle size={80} strokeWidth={1} /></div>
+          
+          <div className="relative z-10 flex flex-col h-full justify-between">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20"><CheckCircle size={20} className="text-emerald-50" /></div>
+              <h3 className="font-bold text-emerald-50 text-sm tracking-wide">Overall SLA Success</h3>
+            </div>
+            <div>
+              <p className="text-5xl font-black tracking-tighter mb-2 drop-shadow-md">94.2%</p>
+              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-100 bg-white/10 w-fit px-2.5 py-1 rounded-full border border-white/20 backdrop-blur-sm">
+                Target: 95% <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 ml-1 shadow-[0_0_8px_rgba(110,231,183,1)]"></span> Almost there
+              </div>
+            </div>
           </div>
         </div>
 
-        <SummaryCard title="SLA Warning (Near Miss)" value="42" subtitle="Requires immediate attention" icon={<Clock size={20} className="text-amber-600" />} bgColor="bg-amber-50" borderColor="border-amber-100" alert />
-        <SummaryCard title="Pending Approvals" value="15" subtitle="Head approval required" icon={<ShieldAlert size={20} className="text-indigo-600" />} bgColor="bg-indigo-50" borderColor="border-indigo-100" />
+        <SummaryCard title="SLA Warning (Near Miss)" value="42" subtitle="Requires immediate attention" icon={<Clock size={20} className="text-amber-600" />} bgColor="bg-amber-50" borderColor="border-amber-200/60" alert />
+        <SummaryCard title="Pending Approvals" value="15" subtitle="Head approval required" icon={<ShieldAlert size={20} className="text-indigo-600" />} bgColor="bg-indigo-50" borderColor="border-indigo-200/60" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 animate-in slide-in-from-bottom-4 duration-500 delay-100">
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
-          <div className="mb-2"><h2 className="text-lg font-bold text-slate-800">Job Order Categories</h2><p className="text-xs text-slate-500">Breakdown of work by type</p></div>
+        <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">Job Order Categories</h2>
+              <p className="text-sm font-medium text-slate-500 mt-0.5">Breakdown of work by type</p>
+            </div>
+            <div className="p-2 bg-blue-50 text-blue-600 rounded-xl"><PieChartIcon size={20} /></div>
+          </div>
           <div className="flex-1 flex items-center justify-center relative min-h-[250px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -576,8 +600,14 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
-            <div className="mb-2"><h2 className="text-lg font-bold text-slate-800">Geographical Distribution</h2><p className="text-xs text-slate-500">Comparing workload between Bangkok and Upcountry</p></div>
+        <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">Geographical Distribution</h2>
+                <p className="text-sm font-medium text-slate-500 mt-0.5">Comparing workload between regions</p>
+              </div>
+              <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><MapPin size={20} /></div>
+            </div>
           <div className="flex-1 flex items-center justify-center min-h-[250px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
