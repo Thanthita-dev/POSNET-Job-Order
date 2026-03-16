@@ -60,3 +60,12 @@ export const allJobsData = [
   { id: "JOB-2026-009", type: "Reprogram", status: "Completed", sla: "Missed", customer: "7-Eleven", branch: "Sukhumvit", date: "2026-03-09", tech: "Wichai", area: "BKK" },
   { id: "JOB-2026-010", type: "Install", status: "In Progress", sla: "On Time", customer: "Big C", branch: "Pattaya", date: "2026-03-13", tech: "Niran", area: "UPC" },
 ];
+
+export const monthlyTrendsData = [
+  { name: 'Jan', completed: 850, incoming: 920 },
+  { name: 'Feb', completed: 920, incoming: 890 },
+  { name: 'Mar', completed: 1100, incoming: 1150 },
+  { name: 'Apr', completed: 1050, incoming: 1080 },
+  { name: 'May', completed: 1250, incoming: 1200 },
+  { name: 'Jun', completed: 1180, incoming: 1250 },
+];

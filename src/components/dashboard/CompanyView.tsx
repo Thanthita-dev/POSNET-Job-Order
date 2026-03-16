@@ -4,19 +4,19 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
-  PieChart, Pie, Cell
+  PieChart, Pie, Cell, AreaChart, Area
 } from 'recharts';
 import { 
   AlertTriangle, CheckCircle, Clock, Search, Bell, Menu,
   Briefcase, Wrench, User, ChevronDown, MapPin, 
   Activity, ShieldAlert, Calendar, Filter, FileCheck2, TrendingUp, PieChart as PieChartIcon,
-  Download, MoreHorizontal, ArrowUpDown, X, Cpu, MessageSquare, Truck, PenTool, Settings, FileText, CheckSquare, Square, LogOut, Moon, Sun
+  Download, MoreHorizontal, ArrowUpDown, X, Cpu, MessageSquare, Truck, PenTool, Settings, FileText, CheckSquare, Square, LogOut, Moon, Sun, ArrowRight
 } from "lucide-react";
 import dynamic from 'next/dynamic';
 
 import { SummaryCard, SlaBadge } from "./SharedComponents";
 import { SettingsView } from "./SettingsView";
-import { slaData, recentJobs, pendingApprovals, missedReasons, jobsByRegion, jobTypesData, allJobsData, alerts } from "./data";
+import { slaData, recentJobs, pendingApprovals, missedReasons, jobsByRegion, jobTypesData, allJobsData, alerts, monthlyTrendsData } from "./data";
 
 const RealisticMap = dynamic(() => import('./RealisticMap'), { 
   ssr: false,
@@ -508,9 +508,9 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
           <div className="flex items-center gap-2 bg-white/80 border border-slate-200/60 shadow-sm rounded-xl px-4 py-2 text-xs sm:text-sm w-full sm:w-auto transition-all hover:shadow-md">
             <Filter size={14} className="text-blue-500" />
-            <span className="font-bold text-slate-700 whitespace-nowrap">Customer:</span>
+            <span className="font-bold text-slate-700 whitespace-nowrap">ลูกค้า (Customer):</span>
             <select className="bg-transparent border-none text-slate-600 font-semibold focus:outline-none cursor-pointer w-full">
-              <option>All Accounts</option>
+              <option>ทุกบัญชีลูกค้า</option>
               <option>Bank Of Wealth</option>
               <option>Retail Corp</option>
             </select>
@@ -518,10 +518,10 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
           <div className="flex items-center gap-2 bg-white/80 border border-slate-200/60 shadow-sm rounded-xl px-4 py-2 text-xs sm:text-sm w-full sm:w-auto transition-all hover:shadow-md">
             <Calendar size={14} className="text-emerald-500" />
             <select className="bg-transparent border-none text-slate-600 font-semibold focus:outline-none cursor-pointer w-full">
-              <option>Today (Live)</option>
-              <option>This Week</option>
-              <option>This Month</option>
-              <option>Q1 2026</option>
+              <option>วันนี้ (Live)</option>
+              <option>สัปดาห์นี้</option>
+              <option>เดือนนี้</option>
+              <option>ไตรมาส 1 / 2026</option>
             </select>
           </div>
         </div>
@@ -536,11 +536,11 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
           <div className="relative z-10 flex flex-col h-full justify-between">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20"><Briefcase size={20} className="text-blue-50" /></div>
-              <h3 className="font-bold text-blue-50 text-sm tracking-wide">Total Job Orders</h3>
+              <h3 className="font-bold text-blue-50 text-sm tracking-wide">ปริมาณงานทั้งหมด</h3>
             </div>
             <div>
               <p className="text-5xl font-black tracking-tighter mb-2 drop-shadow-md">1,248</p>
-              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-300 bg-emerald-900/30 w-fit px-2.5 py-1 rounded-full border border-emerald-500/20 backdrop-blur-sm"><TrendingUp size={12} /> +12% from last week</div>
+              <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-300 bg-emerald-900/30 w-fit px-2.5 py-1 rounded-full border border-emerald-500/20 backdrop-blur-sm"><TrendingUp size={12} /> +12% จากสัปดาห์ก่อน</div>
             </div>
           </div>
         </div>
@@ -553,27 +553,93 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
           <div className="relative z-10 flex flex-col h-full justify-between">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20"><CheckCircle size={20} className="text-emerald-50" /></div>
-              <h3 className="font-bold text-emerald-50 text-sm tracking-wide">Overall SLA Success</h3>
+              <h3 className="font-bold text-emerald-50 text-sm tracking-wide">อัตราความสำเร็จ SLA</h3>
             </div>
             <div>
               <p className="text-5xl font-black tracking-tighter mb-2 drop-shadow-md">94.2%</p>
               <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-100 bg-white/10 w-fit px-2.5 py-1 rounded-full border border-white/20 backdrop-blur-sm">
-                Target: 95% <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 ml-1 shadow-[0_0_8px_rgba(110,231,183,1)]"></span> Almost there
+                เป้าหมาย: 95% <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 ml-1 shadow-[0_0_8px_rgba(110,231,183,1)]"></span> ใกล้สำเร็จแล้ว
               </div>
             </div>
           </div>
         </div>
 
-        <SummaryCard title="SLA Warning (Near Miss)" value="42" subtitle="Requires immediate attention" icon={<Clock size={20} className="text-amber-600" />} bgColor="bg-amber-50" borderColor="border-amber-200/60" alert />
-        <SummaryCard title="Pending Approvals" value="15" subtitle="Head approval required" icon={<ShieldAlert size={20} className="text-indigo-600" />} bgColor="bg-indigo-50" borderColor="border-indigo-200/60" />
+        <SummaryCard title="งานใกล้หลุด SLA (Warning)" value="42" subtitle="ต้องการการตรวจสอบด่วน" icon={<Clock size={20} className="text-amber-600" />} bgColor="bg-amber-50" borderColor="border-amber-200/60" alert />
+        <SummaryCard title="รอการอนุมัติ (Pending)" value="15" subtitle="ต้องการการอนุมัติจาก Head" icon={<ShieldAlert size={20} className="text-indigo-600" />} bgColor="bg-indigo-50" borderColor="border-indigo-200/60" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 animate-in slide-in-from-bottom-4 duration-500 delay-100">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 animate-in slide-in-from-bottom-4 duration-500 delay-100">
+        <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] lg:col-span-2 flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">แนวโน้มปริมาณงาน (Job Volume Trends)</h2>
+              <p className="text-sm font-medium text-slate-500 mt-0.5">เปรียบเทียบงานที่รับเข้าและงานที่ปิดสำเร็จรายเดือน</p>
+            </div>
+            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><TrendingUp size={20} /></div>
+          </div>
+          <div className="h-72 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={monthlyTrendsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorIncoming" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="colorCompleted" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 600}} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 500}} />
+                <RechartsTooltip contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)'}} />
+                <Legend iconType="circle" wrapperStyle={{fontSize: '12px', fontWeight: 700, color: '#334155', paddingTop:'20px'}} />
+                <Area type="monotone" dataKey="incoming" name="งานรับเข้า (Incoming)" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorIncoming)" />
+                <Area type="monotone" dataKey="completed" name="ปิดงานสำเร็จ (Completed)" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorCompleted)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-6">
+          <div className="bg-white/80 backdrop-blur-xl p-6 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex-1 flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-extrabold text-slate-800 tracking-tight">ลูกค้า Top 3 (จำแนกตาม SLA)</h2>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-3 bg-slate-50/50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">BW</div>
+                  <div><p className="font-bold text-slate-800 text-sm">Bank Of Wealth</p><p className="text-xs text-slate-500 font-medium">SLA: 98%</p></div>
+                </div>
+                <div className="text-right"><p className="font-black text-slate-700">450</p><p className="text-[10px] font-bold text-slate-400">งาน/เดือน</p></div>
+              </div>
+              <div className="flex items-center justify-between p-3 bg-slate-50/50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">RC</div>
+                  <div><p className="font-bold text-slate-800 text-sm">Retail Corp</p><p className="text-xs text-slate-500 font-medium">SLA: 94%</p></div>
+                </div>
+                <div className="text-right"><p className="font-black text-slate-700">320</p><p className="text-[10px] font-bold text-slate-400">งาน/เดือน</p></div>
+              </div>
+              <div className="flex items-center justify-between p-3 bg-slate-50/50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">CA</div>
+                  <div><p className="font-bold text-slate-800 text-sm">Cafe Amazon</p><p className="text-xs text-slate-500 font-medium">SLA: 99%</p></div>
+                </div>
+                <div className="text-right"><p className="font-black text-slate-700">280</p><p className="text-[10px] font-bold text-slate-400">งาน/เดือน</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 animate-in slide-in-from-bottom-4 duration-500 delay-200">
         <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">Job Order Categories</h2>
-              <p className="text-sm font-medium text-slate-500 mt-0.5">Breakdown of work by type</p>
+              <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">สัดส่วนประเภทงาน (Job Categories)</h2>
+              <p className="text-sm font-medium text-slate-500 mt-0.5">แบ่งตามประเภทการให้บริการ</p>
             </div>
             <div className="p-2 bg-blue-50 text-blue-600 rounded-xl"><PieChartIcon size={20} /></div>
           </div>
@@ -592,9 +658,9 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-100">
             {jobTypesData.map(item => (
-              <div key={item.name} className="flex flex-col items-center text-center">
-                <div className="flex items-center gap-1.5 mb-1"><div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div><span className="text-xs font-semibold text-slate-600">{item.name}</span></div>
-                <span className="text-sm font-bold text-slate-800">{item.value}</span>
+              <div key={item.name} className="flex flex-col items-center text-center p-2 rounded-xl hover:bg-slate-50 transition-colors">
+                <div className="flex items-center gap-1.5 mb-1"><div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div><span className="text-xs font-bold text-slate-600">{item.name}</span></div>
+                <span className="text-base font-black text-slate-800">{item.value}</span>
               </div>
             ))}
           </div>
@@ -603,8 +669,8 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
         <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">Geographical Distribution</h2>
-                <p className="text-sm font-medium text-slate-500 mt-0.5">Comparing workload between regions</p>
+                <h2 className="text-xl font-extrabold text-slate-800 tracking-tight">สัดส่วนพื้นที่ (Geographical)</h2>
+                <p className="text-sm font-medium text-slate-500 mt-0.5">เปรียบเทียบภาระงานระหว่าง กทม. และ ต่างจังหวัด</p>
               </div>
               <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl"><MapPin size={20} /></div>
             </div>
@@ -620,9 +686,9 @@ function ExecutiveDashboardContent({ openModal }: { openModal: (id: string) => v
           </div>
             <div className="flex justify-center gap-8 mt-2">
               {jobsByRegion.map(item => (
-                <div key={item.name} className="flex items-center gap-4 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center shadow-inner" style={{ backgroundColor: `${item.color}20`, color: item.color }}><MapPin size={20} /></div>
-                  <div><p className="text-xs font-bold text-slate-500">{item.name} Region</p><p className="text-xl font-black text-slate-800">{item.value}</p></div>
+                <div key={item.name} className="flex items-center gap-4 bg-white px-5 py-3 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${item.color}15`, color: item.color }}><MapPin size={24} /></div>
+                  <div><p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{item.name} Region</p><p className="text-2xl font-black text-slate-800">{item.value}</p></div>
                 </div>
               ))}
             </div>
