@@ -526,11 +526,6 @@ function ExecutiveDashboardContent({ openModal, openCreateModal }: { openModal: 
             <p className="text-slate-500 text-base max-w-lg font-medium leading-relaxed">
               สรุปภาพรวมการดำเนินงานและวิเคราะห์ประสิทธิภาพระบบแบบเรียลไทม์ <br className="hidden lg:block" />เพื่อการบริหารจัดการที่รวดเร็วและแม่นยำ
             </p>
-            <div className="pt-2 flex flex-wrap justify-center lg:justify-start gap-3">
-               <button onClick={openCreateModal} className="px-6 py-3 bg-slate-900 text-white font-black text-xs rounded-xl shadow-lg hover:bg-black transition-all hover:-translate-y-0.5 flex items-center gap-2">
-                 <Plus size={16} strokeWidth={3} /> สร้างใบสั่งงานใหม่
-               </button>
-            </div>
           </div>
 
           <div className="flex items-center gap-8 bg-slate-50/50 backdrop-blur-sm p-6 rounded-[2rem] border border-slate-100 shadow-inner">
