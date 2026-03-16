@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { RefreshCw } from "lucide-react";
 
 import { CompanyView } from "../components/dashboard/CompanyView";
@@ -19,10 +19,21 @@ export default function DashboardPage() {
 
 function DashboardRouter() {
   const searchParams = useSearchParams();
-  const role = searchParams.get("role") || "company"; // Default to company if no role is provided
+  const router = useRouter();
+  const role = searchParams.get("role");
+
+  useEffect(() => {
+    if (!role) {
+      router.push("/login");
+    }
+  }, [role, router]);
 
   const [isCloseJobModalOpen, setIsCloseJobModalOpen] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState("");
+
+  if (!role) {
+    return <div className="min-h-screen flex items-center justify-center bg-slate-50"><RefreshCw className="animate-spin text-blue-600" size={32} /></div>;
+  }
 
   const openCloseJobModal = (jobId: string) => {
     setSelectedJobId(jobId);
