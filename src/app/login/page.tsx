@@ -84,20 +84,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <div className="relative z-10 glass-panel border border-white/10 p-6 rounded-3xl max-w-md mt-12 hover:-translate-y-2 transition-transform duration-500 shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-3xl"></div>
-          <div className="flex items-start gap-4 mb-4 relative z-10">
-            <div className="p-3 bg-emerald-500/20 rounded-2xl border border-emerald-500/30 text-emerald-400 shrink-0">
-              <ShieldCheck size={28} />
-            </div>
-            <div>
-              <h3 className="font-bold text-xl text-white mb-1">ปลอดภัย & แยกข้อมูลชัดเจน</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                ระบบรักษาความปลอดภัยระดับองค์กร มั่นใจได้ว่าบัญชีบริษัทและลูกค้าจะเข้าถึงได้เฉพาะข้อมูลที่ได้รับสิทธิ์เท่านั้น
-              </p>
-            </div>
-          </div>
-        </div>
+
       </div>
 
       {/* Right Panel - Login Form */}
