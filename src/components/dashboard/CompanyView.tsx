@@ -728,12 +728,12 @@ function SlaTrackerContent() {
 function CommandCenterContent({ openModal }: { openModal: (id: string) => void }) {
   return (
     <div className="animate-in slide-in-from-bottom-4 duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white p-3 lg:p-4 rounded-xl border border-slate-200 shadow-sm animate-in fade-in duration-300">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white/60 backdrop-blur-xl p-3 lg:p-4 rounded-2xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-in fade-in duration-300">
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs sm:text-sm w-full sm:w-auto">
-            <Filter size={14} className="text-slate-500" />
-            <span className="font-semibold text-slate-700 whitespace-nowrap">Customer:</span>
-            <select className="bg-transparent border-none text-slate-600 font-medium focus:outline-none cursor-pointer w-full">
+          <div className="flex items-center gap-2 bg-white/80 border border-slate-200/60 shadow-sm rounded-xl px-4 py-2 text-xs sm:text-sm w-full sm:w-auto transition-all hover:shadow-md">
+            <Filter size={14} className="text-blue-500" />
+            <span className="font-bold text-slate-700 whitespace-nowrap">Customer:</span>
+            <select className="bg-transparent border-none text-slate-600 font-semibold focus:outline-none cursor-pointer w-full">
               <option>All Accounts</option>
               <option>Bank Of Wealth</option>
             </select>
@@ -751,42 +751,52 @@ function CommandCenterContent({ openModal }: { openModal: (id: string) => void }
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <SummaryCard title="Active Jobs Today" value="156" subtitle="Across all regions" icon={<Briefcase size={20} className="text-blue-600" />} bgColor="bg-blue-50" borderColor="border-blue-100" />
         <SummaryCard title="SLA Missed" value="18" subtitle="Action required" icon={<AlertTriangle size={20} className="text-rose-600" />} bgColor="bg-rose-50" borderColor="border-rose-100" alert />
-        <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-4 rounded-2xl shadow-sm border border-slate-700 text-white col-span-2 flex items-center justify-around relative overflow-hidden">
-          <div className="absolute right-0 top-0 opacity-10"><MapPin size={100} /></div>
-          <div className="relative z-10 flex flex-col items-center"><span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Techs Online</span><span className="text-3xl font-black text-emerald-400">85</span></div>
-          <div className="w-px h-10 bg-slate-700 relative z-10"></div>
-          <div className="relative z-10 flex flex-col items-center"><span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">On-Site</span><span className="text-3xl font-black text-blue-400">62</span></div>
-          <div className="w-px h-10 bg-slate-700 relative z-10"></div>
-          <div className="relative z-10 flex flex-col items-center"><span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-1">Idle</span><span className="text-3xl font-black text-slate-300">23</span></div>
+        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-black p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-slate-700/50 text-white col-span-2 flex items-center justify-around relative overflow-hidden group hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300">
+          <div className="absolute right-0 top-0 opacity-[0.05] transform group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-700"><MapPin size={120} /></div>
+          <div className="relative z-10 flex flex-col items-center"><span className="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-2 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span> Techs Online</span><span className="text-4xl font-black text-emerald-400 tracking-tighter">85</span></div>
+          <div className="w-px h-16 bg-slate-700/50 relative z-10"></div>
+          <div className="relative z-10 flex flex-col items-center"><span className="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-2">On-Site</span><span className="text-4xl font-black text-blue-400 tracking-tighter">62</span></div>
+          <div className="w-px h-16 bg-slate-700/50 relative z-10"></div>
+          <div className="relative z-10 flex flex-col items-center"><span className="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-2">Idle</span><span className="text-4xl font-black text-slate-300 tracking-tighter">23</span></div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm lg:col-span-2">
-          <div className="flex justify-between items-center mb-6"><div><h2 className="text-lg font-bold text-slate-800">SLA Tracking (Live)</h2><p className="text-xs text-slate-500 mt-1">Breakdown of SLA status across different job types</p></div></div>
+        <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] lg:col-span-2 flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+          <div className="flex justify-between items-center mb-8"><div><h2 className="text-xl font-extrabold text-slate-800 tracking-tight">SLA Tracking (Live)</h2><p className="text-sm font-medium text-slate-500 mt-0.5">Breakdown of SLA status across different job types</p></div></div>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={slaData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 11, fontWeight: 500}} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 11}} />
-                <RechartsTooltip cursor={{fill: '#f8fafc'}} contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)'}} />
-                <Legend iconType="circle" wrapperStyle={{fontSize: '11px', fontWeight: 600, color: '#475569'}}/>
-                <Bar dataKey="onTime" name="On Time" stackId="a" fill="#10b981" radius={[0, 0, 4, 4]} barSize={40} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f8fafc" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 600}} dy={15} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 500}} />
+                <RechartsTooltip cursor={{fill: '#f1f5f9'}} contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', padding: '12px'}} />
+                <Legend iconType="circle" wrapperStyle={{fontSize: '12px', fontWeight: 700, color: '#334155', paddingTop: '20px'}}/>
+                <Bar dataKey="onTime" name="On Time" stackId="a" fill="#10b981" radius={[0, 0, 6, 6]} barSize={40} />
                 <Bar dataKey="nearMiss" name="Warning" stackId="a" fill="#f59e0b" />
-                <Bar dataKey="missed" name="Missed" stackId="a" fill="#ef4444" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="missed" name="Missed" stackId="a" fill="#ef4444" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
-          <h2 className="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2"><AlertTriangle size={16} className="text-rose-500" />Top SLA Missed Reasons</h2>
-          <div className="space-y-4 flex-1 justify-center flex flex-col">
+        <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+          <h2 className="text-lg font-extrabold text-slate-800 mb-6 flex items-center gap-3">
+            <div className="p-2.5 bg-rose-50 text-rose-500 rounded-xl"><AlertTriangle size={20} /></div>
+            Top SLA Missed Reasons
+          </h2>
+          <div className="space-y-6 flex-1 justify-center flex flex-col mt-4">
             {missedReasons.map((reason, idx) => (
-              <div key={idx}>
-                <div className="flex justify-between text-xs mb-1.5"><span className="font-medium text-slate-600">{reason.name}</span><span className="font-bold text-slate-800">{reason.count}</span></div>
-                <div className="w-full bg-slate-100 rounded-full h-2"><div className="bg-rose-400 h-2 rounded-full" style={{ width: `${(reason.count / 28) * 100}%` }}></div></div>
+              <div key={idx} className="group">
+                <div className="flex justify-between items-end text-sm mb-2">
+                  <span className="font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">{reason.name}</span>
+                  <span className="font-black text-slate-800">{reason.count}</span>
+                </div>
+                <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                  <div className="bg-gradient-to-r from-rose-400 to-rose-500 h-full rounded-full relative group-hover:brightness-110 transition-all" style={{ width: `${(reason.count / 28) * 100}%` }}>
+                    <div className="absolute inset-0 bg-white/20 w-full h-full transform -skew-x-12 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -794,77 +804,78 @@ function CommandCenterContent({ openModal }: { openModal: (id: string) => void }
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="bg-white rounded-2xl border border-amber-200 shadow-sm overflow-hidden flex flex-col">
-            <div className="p-4 border-b border-slate-100 bg-amber-50/50 flex justify-between items-center">
-            <h2 className="text-sm font-bold text-slate-800 flex items-center gap-2">
-              <ShieldAlert size={16} className="text-amber-600" /> 
+        <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-amber-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+            <div className="p-6 border-b border-amber-100/50 bg-gradient-to-b from-amber-50/50 to-transparent flex justify-between items-center">
+            <h2 className="text-lg font-extrabold text-slate-800 flex items-center gap-3">
+              <div className="p-2.5 bg-amber-100 text-amber-600 rounded-xl"><ShieldAlert size={20} /></div>
               Pending Approvals
             </h2>
-            <span className="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded-full">2 Reqs</span>
+            <span className="bg-amber-100 text-amber-800 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">2 Reqs</span>
           </div>
-          <div className="divide-y divide-slate-100 flex-1">
+          <div className="divide-y divide-slate-100/60 flex-1 p-2">
             {pendingApprovals.map(req => (
-              <div key={req.id} className="p-4 hover:bg-slate-50 transition-colors">
-                <div className="flex justify-between items-start mb-1.5">
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 uppercase">{req.type}</span>
-                  <span className="text-[10px] text-slate-400 font-medium">By: {req.reqBy}</span>
+              <div key={req.id} className="p-4 hover:bg-slate-50/80 rounded-2xl transition-colors m-2">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 uppercase tracking-wider">{req.type}</span>
+                  <span className="text-[11px] text-slate-500 font-semibold bg-white px-2 py-0.5 rounded-md border border-slate-100 shadow-sm">By: {req.reqBy}</span>
                 </div>
-                <p className="text-xs text-slate-700 font-medium leading-relaxed mb-3">{req.desc}</p>
-                <div className="flex gap-2">
-                  <button className="flex-1 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded text-xs font-bold transition-colors">Approve</button>
-                  <button className="flex-1 py-1.5 bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 rounded text-xs font-bold transition-colors">Review</button>
+                <p className="text-sm text-slate-700 font-medium leading-relaxed mb-4">{req.desc}</p>
+                <div className="flex gap-3">
+                  <button className="flex-1 py-2.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-500 hover:text-white border border-emerald-200 hover:border-emerald-500 rounded-xl text-xs font-bold transition-all shadow-sm">Approve</button>
+                  <button className="flex-1 py-2.5 bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold transition-all shadow-sm">Review</button>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden lg:col-span-2 flex flex-col">
-          <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-white">
+        <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden lg:col-span-2 flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+          <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-white/50">
             <div>
-              <h2 className="text-sm font-bold text-slate-800 flex items-center gap-2">
-                <Wrench size={16} className="text-blue-600" /> Active Job Orders
+              <h2 className="text-lg font-extrabold text-slate-800 flex items-center gap-3">
+                <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl"><Wrench size={20} /></div> 
+                Active Job Orders
               </h2>
             </div>
-            <button className="text-xs text-blue-600 font-bold hover:underline">View All</button>
+            <button className="text-sm text-blue-600 font-bold hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-xl transition-colors">View All</button>
           </div>
-          <div className="overflow-x-auto flex-1">
+          <div className="overflow-x-auto flex-1 p-2">
             <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-slate-50/80 text-slate-500 font-semibold text-[11px] uppercase tracking-wider">
+              <thead className="text-slate-400 font-bold text-[11px] uppercase tracking-widest border-b border-slate-100">
                 <tr>
-                  <th className="py-3 px-5">Job ID / Customer</th>
-                  <th className="py-3 px-5">Type / Area</th>
-                  <th className="py-3 px-5">SLA Status</th>
-                  <th className="py-3 px-5 text-right">Action</th>
+                  <th className="py-4 px-6">Job ID / Customer</th>
+                  <th className="py-4 px-5">Type / Area</th>
+                  <th className="py-4 px-5">SLA Status</th>
+                  <th className="py-4 px-5 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100/60">
                 {recentJobs.map((job) => (
-                  <tr key={job.id} className="hover:bg-slate-50 transition-colors group">
-                    <td className="py-3.5 px-5">
+                  <tr key={job.id} className="hover:bg-blue-50/30 transition-colors group">
+                    <td className="py-4 px-6">
                       <div className="flex flex-col">
-                        <span className="font-bold text-blue-600 cursor-pointer hover:underline text-xs">{job.id}</span>
-                        <span className="font-semibold text-slate-700 text-sm">{job.customer}</span>
+                        <span className="font-extrabold text-blue-600 cursor-pointer group-hover:text-blue-700 transition-colors text-xs">{job.id}</span>
+                        <span className="font-bold text-slate-700 text-sm mt-0.5">{job.customer}</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-5">
+                    <td className="py-4 px-5">
                       <div className="flex flex-col">
                         <span className="font-semibold text-slate-700 text-xs">{job.type}</span>
-                        <span className="text-[10px] text-slate-500 mt-0.5">{job.area} • {job.subType !== '-' ? job.subType : ''}</span>
+                        <span className="text-[10px] text-slate-500 mt-1 font-medium">{job.area} • {job.subType !== '-' ? job.subType : ''}</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-5">
+                    <td className="py-4 px-5">
                       <SlaBadge status={job.sla} />
                     </td>
-                    <td className="py-3.5 px-5 text-right align-middle">
+                    <td className="py-4 px-5 text-right align-middle">
                       {job.status === 'In Progress' ? (
                         <button 
                           onClick={() => openModal(job.id)}
-                          className="px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded shadow-sm hover:bg-blue-700 transition-colors flex items-center gap-1.5 ml-auto">
-                          <FileCheck2 size={14} /> Close Job
+                          className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl shadow-md shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center gap-2 ml-auto active:scale-95">
+                          <FileCheck2 size={16} /> Close Job
                         </button>
                       ) : (
-                          <button className="px-3 py-1.5 bg-white border border-slate-200 text-slate-600 text-xs font-bold rounded shadow-sm hover:bg-slate-50 transition-colors ml-auto">
+                          <button className="px-4 py-2 bg-white border border-slate-200 text-slate-600 text-xs font-bold rounded-xl shadow-sm hover:bg-slate-50 transition-all ml-auto">
                           Details
                         </button>
                       )}

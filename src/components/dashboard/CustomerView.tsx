@@ -71,31 +71,31 @@ export function CustomerView({ openModal }: { openModal: (id: string) => void })
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm lg:col-span-2">
-              <h2 className="text-base font-bold text-slate-800 mb-1">Your SLA Performance</h2>
-              <p className="text-xs text-slate-500 mb-6">Service Level Agreement tracking for all your branches</p>
-              <div className="h-60">
+            <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] lg:col-span-2 flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+              <h2 className="text-xl font-extrabold text-slate-800 tracking-tight mb-1">Your SLA Performance</h2>
+              <p className="text-sm font-medium text-slate-500 mb-8">Service Level Agreement tracking for all your branches</p>
+              <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={[
                     { name: "Install", onTime: 40, missed: 2 },
                     { name: "Service", onTime: 35, missed: 0 },
                     { name: "PM", onTime: 50, missed: 0 },
                   ]} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 11}} dy={10} />
-                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 11}} />
-                    <RechartsTooltip cursor={{fill: '#f8fafc'}} contentStyle={{borderRadius: '8px', fontSize: '12px'}} />
-                    <Legend iconType="circle" wrapperStyle={{fontSize: '11px', fontWeight: 600, color: '#475569', paddingTop:'10px'}}/>
-                    <Bar dataKey="onTime" name="On Time" stackId="a" fill="#10b981" radius={[0, 0, 4, 4]} barSize={32} />
-                    <Bar dataKey="missed" name="Missed" stackId="a" fill="#ef4444" radius={[4, 4, 0, 0]} />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f8fafc" />
+                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 600}} dy={15} />
+                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 500}} />
+                    <RechartsTooltip cursor={{fill: '#f1f5f9'}} contentStyle={{borderRadius: '12px', fontSize: '13px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)'}} />
+                    <Legend iconType="circle" wrapperStyle={{fontSize: '12px', fontWeight: 700, color: '#334155', paddingTop:'20px'}}/>
+                    <Bar dataKey="onTime" name="On Time" stackId="a" fill="#10b981" radius={[0, 0, 6, 6]} barSize={40} />
+                    <Bar dataKey="missed" name="Missed" stackId="a" fill="#ef4444" radius={[6, 6, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
             
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
-              <h2 className="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
-                <Calendar size={16} className="text-blue-500" />
+            <div className="bg-white/80 backdrop-blur-xl p-6 lg:p-8 rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300">
+              <h2 className="text-lg font-extrabold text-slate-800 mb-6 flex items-center gap-3">
+                <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl"><Calendar size={20} /></div>
                 Upcoming Schedules
               </h2>
               <div className="flex-1 space-y-4">
@@ -123,34 +123,34 @@ export function CustomerView({ openModal }: { openModal: (id: string) => void })
             </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="p-4 border-b border-slate-100 bg-white">
-            <h2 className="text-sm font-bold text-slate-800">Job History</h2>
+        <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
+          <div className="p-6 border-b border-slate-100 bg-white/50">
+            <h2 className="text-lg font-extrabold text-slate-800 tracking-tight">Job History</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-slate-50 text-slate-500 font-semibold text-[11px] uppercase tracking-wider">
+              <thead className="bg-slate-50/50 text-slate-500 font-bold text-[11px] uppercase tracking-wider">
                 <tr>
-                  <th className="py-3 px-5">Job ID</th>
-                  <th className="py-3 px-5">Type</th>
-                  <th className="py-3 px-5">Date</th>
-                  <th className="py-3 px-5">Status</th>
-                  <th className="py-3 px-5 text-right">Details</th>
+                  <th className="py-4 px-6">Job ID</th>
+                  <th className="py-4 px-6">Type</th>
+                  <th className="py-4 px-6">Date</th>
+                  <th className="py-4 px-6">Status</th>
+                  <th className="py-4 px-6 text-right">Details</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {recentJobs.filter(j => j.customer === "Bank Of Wealth").map((job) => (
-                  <tr key={job.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="py-3 px-5 font-bold text-slate-800">{job.id}</td>
-                    <td className="py-3 px-5 text-slate-600">{job.type}</td>
-                    <td className="py-3 px-5 text-slate-600">{job.date}</td>
-                    <td className="py-3 px-5">
-                      <span className={`px-2 py-1 rounded text-[10px] font-bold ${job.status === 'Completed' ? 'bg-emerald-50 text-emerald-600' : 'bg-blue-50 text-blue-600'}`}>
+                  <tr key={job.id} className="hover:bg-blue-50/30 transition-colors group">
+                    <td className="py-4 px-6 font-extrabold text-slate-700">{job.id}</td>
+                    <td className="py-4 px-6 font-medium text-slate-600">{job.type}</td>
+                    <td className="py-4 px-6 font-medium text-slate-600">{job.date}</td>
+                    <td className="py-4 px-6">
+                      <span className={`px-2.5 py-1 rounded-lg text-[10px] font-bold tracking-wide ${job.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'}`}>
                         {job.status}
                       </span>
                     </td>
-                    <td className="py-3 px-5 text-right">
-                      <button className="text-blue-600 hover:underline text-xs font-semibold">View Report</button>
+                    <td className="py-4 px-6 text-right">
+                      <button className="text-blue-600 hover:text-blue-800 font-bold text-xs bg-white border border-slate-200 shadow-sm px-3 py-1.5 rounded-lg group-hover:border-blue-200 transition-all">View Report</button>
                     </td>
                   </tr>
                 ))}
